@@ -1,12 +1,14 @@
 import React from 'react';
 
 const RepoCard = (props) => {
-  const {full_name, svn_url, description} = props.repo
+  const {full_name, html_url, description, owner, language, stargazers_count} = props.repo
   return (
     <div>
       {full_name}
       {description}
-      {svn_url}
+      {html_url}
+      {language}
+      {stargazers_count}
     </div>
   )
 }

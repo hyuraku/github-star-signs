@@ -1,6 +1,7 @@
 import React from 'react';
 import SearchBar from './SearchBar'
 import RepoList from './RepoList'
+import NameError from './NameError';
 import github from '../api/github'
 
 class  App extends React.Component{
@@ -20,15 +21,19 @@ class  App extends React.Component{
       })
     }
   }
+  renderContent(){
+    if (this.state.http_status === 404 && this.state.name !== "") {
+      return <NameError name={this.state.name}/>
+    }
+    if (this.state.http_status === 200 && this.state.name !== "") {
+      return <RepoList repos={this.state.starred_repos}/>
+    }
+  }
   render(){
       return (
       <div>
         <SearchBar onSubmit={this.onSearchSubmit}/>
-        <RepoList
-          repos={this.state.starred_repos}
-          name={this.state.name}
-          status_code={this.state.http_status}
-        />
+        { this.renderContent() }
       </div>
     )
   }

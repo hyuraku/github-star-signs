@@ -4,35 +4,49 @@ import RepoList from './RepoList'
 import NameError from './NameError';
 import github from '../api/github'
 
-class  App extends React.Component{
-  state = { starred_repos: [], name: '', http_status: 200 }
+class App extends React.Component {
+  state = {
+    starred_repos: [],
+    name: '',
+    http_status: 200,
+    err_msg: ''
+  }
 
-  onSearchSubmit = async(name) => {
+  onSearchSubmit = async (name) => {
     let response = ''
-    this.setState({name: name})
     try {
       response = await github.get(`/users/${name}/starred`);
       this.setState({
-        starred_repos: response.data
+        name: name,
+        http_status: response.status,
+        starred_repos: response.data,
+        err_msg: ''
       })
     } catch (error) {
       this.setState({
-        http_status: error.response.status
+        name: name,
+        http_status: error.response.status,
+        err_msg: error.response.message
       })
     }
   }
-  renderContent(){
-    if (this.state.http_status === 404 && this.state.name !== "") {
-      return <NameError name={this.state.name}/>
-    }
+  renderContent() {
     if (this.state.http_status === 200 && this.state.name !== "") {
-      return <RepoList repos={this.state.starred_repos}/>
+      return <RepoList repos = {
+        this.state.starred_repos
+      }
+      />
+    } else if (this.state.err_msg !== 200 && this.state.name !== "") {
+      return <NameError name = {
+        this.state.name
+      }
+      />
     }
   }
-  render(){
-      return (
+  render() {
+    return (
       <div>
-        <SearchBar onSubmit={this.onSearchSubmit}/>
+        < SearchBar onSubmit = { this.onSearchSubmit }/>
         { this.renderContent() }
       </div>
     )

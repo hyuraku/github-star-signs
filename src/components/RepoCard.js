@@ -1,4 +1,5 @@
 import React from 'react';
+import './RepoCard.css'
 
 const RepoCard = (props) => {
   const {name, html_url, description, owner, language, stargazers_count} = props.repo
@@ -6,12 +7,12 @@ const RepoCard = (props) => {
     <div className="card">
       <div className="content">
         <div className="ui header">
-          <a href={html_url}>
+          <a href={html_url} target="_blank">
             {name}
           </a>
         </div>
         <div className = "ui meta grid">
-          <div className = "three column row">
+          < div className = "ui equal width row" >
             <div className = "column" >{owner.login} </div>
             <div className = "column" >{language} </div>
             <div className = "column" >{stargazers_count} </div>

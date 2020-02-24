@@ -1,6 +1,7 @@
 import React from 'react';
 import SearchBar from './SearchBar'
 import RepoList from './RepoList'
+import NoStarRepo from './NoStarRepo'
 import NameError from './NameError';
 import github from '../api/github'
 
@@ -30,24 +31,20 @@ class App extends React.Component {
       })
     }
   }
-  renderContent() {
-    if (this.state.http_status === 200 && this.state.name !== "") {
-      return <RepoList repos = {
-        this.state.starred_repos
-      }
-      />
-    } else if (this.state.err_msg !== 200 && this.state.name !== "") {
-      return <NameError name = {
-        this.state.name
-      }
-      />
-    }
-  }
+
   render() {
+    let result = ""
+    if (this.state.http_status === 200 && this.state.name !== "" && this.state.starred_repos.length === 0) {
+      result = < NoStarRepo name = {this.state.name}/>
+    } else if (this.state.http_status === 200 && this.state.name !== "" ) {
+      result = < RepoList repos = {this.state.starred_repos}/>
+    } else if (this.state.http_status !== 200 && this.state.name !== "") {
+      result = < NameError name = {this.state.name}/>
+    }
     return (
       <div>
         < SearchBar onSubmit = { this.onSearchSubmit }/>
-        { this.renderContent() }
+        { result }
       </div>
     )
   }

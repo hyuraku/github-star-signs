@@ -34,12 +34,16 @@ class App extends React.Component {
 
   render() {
     let result = ""
-    if (this.state.http_status === 200 && this.state.name !== "" && this.state.starred_repos.length === 0) {
-      result = < NoStarRepo name = {this.state.name}/>
-    } else if (this.state.http_status === 200 && this.state.name !== "" ) {
-      result = < RepoList repos = {this.state.starred_repos}/>
-    } else if (this.state.http_status !== 200 && this.state.name !== "") {
-      result = < NameError name = {this.state.name}/>
+    if (this.state.name !== "") {
+      if (this.state.http_status === 200) {
+        if (this.state.starred_repos.length === 0) {
+          result = < NoStarRepo name = {this.state.name}/>
+        } else {
+          result = < RepoList repos = {this.state.starred_repos}/>
+        }
+      } else {
+        result = < NameError name = {this.state.name}/>
+      }
     }
     return (
       <div>

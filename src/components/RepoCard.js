@@ -7,7 +7,11 @@ const RepoCard = (props) => {
     <div className="card">
       <div className="content">
         <div className="ui header">
-          <a href={html_url} target="_blank">
+          <a
+           href={html_url}
+           target="_blank"
+           rel="noreferrer noopener"
+           >
             {name}
           </a>
         </div>

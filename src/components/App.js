@@ -15,7 +15,12 @@ class App extends React.Component {
   onSearchSubmit = async (name) => {
     let response = ''
     try {
-      response = await github.get(`/users/${name}/starred`);
+      response = await github.get(`/users/${name}/starred`,{
+        params: {
+          per_page: 90,
+          page: 1
+        }
+      });
       this.setState({
         name: name,
         http_status: response.status,

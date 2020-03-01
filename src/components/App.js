@@ -7,9 +7,11 @@ import github from '../api/github'
 class App extends React.Component {
   state = {
     starred_repos: [],
+    add_repo_size: 90,
     name: '',
     http_status: 200,
-    err_msg: ''
+    err_msg: '',
+    page: 1
   }
 
   onSearchSubmit = async (name) => {
@@ -18,14 +20,16 @@ class App extends React.Component {
       response = await github.get(`/users/${name}/starred`,{
         params: {
           per_page: 90,
-          page: 1
+          page: this.state.page
         }
       });
       this.setState({
         name: name,
         http_status: response.status,
         starred_repos: response.data,
-        err_msg: ''
+        page: this.state.page + 1,
+        err_msg: '',
+        add_repo_size: response.data.length
       })
     } catch (error) {
       this.setState({
@@ -35,6 +39,30 @@ class App extends React.Component {
       })
     }
   }
+
+  async additional(name, page) {
+    let add_response = await github.get(`/users/${name}/starred`, {
+      params: {
+        per_page: 90,
+        page: page
+      }
+    });
+    this.setState({
+      starred_repos: this.state.starred_repos.concat(add_response.data),
+      page: this.state.page + 1,
+      add_repo_size: add_response.data.length
+    })
+  }
+
+  componentDidUpdate(_, prevState) {
+    if (this.state.name !== prevState.name && prevState.name !== "") {
+      this.setState({page: 1})
+    }
+    if (this.state.name !== "" && this.state.add_repo_size === 90) {
+      this.additional(this.state.name, this.state.page)
+    }
+  }
+
   renderContent() {
     if (this.state.http_status === 200 && this.state.name !== "") {
       return <RepoList repos = {

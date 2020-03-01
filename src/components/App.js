@@ -7,7 +7,7 @@ import github from '../api/github'
 class App extends React.Component {
   state = {
     starred_repos: [],
-    add_repo_size: 90,
+    add_repo_size: 0,
     name: '',
     http_status: 200,
     err_msg: '',

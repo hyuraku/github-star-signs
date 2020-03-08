@@ -1,5 +1,5 @@
 import React from 'react'
-import './RepoCard.css'
+import '../css/RepoCard.css'
 
 const RepoCard = props => {
   const {

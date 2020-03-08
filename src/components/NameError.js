@@ -1,5 +1,5 @@
 import React from 'react'
-import './NameError.css'
+import '../css/NameError.css'
 
 const NameError = props => {
   return (

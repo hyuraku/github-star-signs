@@ -1,4 +1,5 @@
 import React from 'react'
+import './SearchBar.css'
 
 class SearchBar extends React.Component {
   state = { name: '' }
@@ -14,9 +15,10 @@ class SearchBar extends React.Component {
       <div className="ui segment">
         <form onSubmit={this.onFormSubmit} className="ui form">
           <div className="field">
-            <label>Enter Your Account Name</label>
+            <h1>Enter GitHub username</h1>
             <input
               type="text"
+              autoFocus="autoFocus"
               value={this.state.name}
               onChange={e => this.setState({ name: e.target.value })}
             />

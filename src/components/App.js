@@ -5,6 +5,7 @@ import NoStarRepo from './NoStarRepo'
 import NameError from './NameError'
 import github from '../api/github'
 
+const max_repo_size = 90
 class App extends React.Component {
   state = {
     starred_repos: [],
@@ -21,7 +22,7 @@ class App extends React.Component {
       this.setState({page: 1})
       response = await github.get(`/users/${name}/starred`,{
         params: {
-          per_page: 90,
+          per_page: max_repo_size,
           page: 1
         }
       });
@@ -45,7 +46,7 @@ class App extends React.Component {
   async additional(name, page) {
     let add_response = await github.get(`/users/${name}/starred`, {
       params: {
-        per_page: 90,
+        per_page: max_repo_size,
         page: page,
       },
     })

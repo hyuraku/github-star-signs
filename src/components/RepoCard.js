@@ -22,7 +22,7 @@ const RepoCard = props => {
           <div className="ui equal width row">
             <div className="column">{owner.login} </div>
             <div className="column">{language} </div>
-            <div className="column">{stargazers_count} </div>
+            <div className="column">&#9733;{stargazers_count} </div>
           </div>
         </div>
         <div className="ui description">{description}</div>

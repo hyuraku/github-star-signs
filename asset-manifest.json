@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/github-star-signs/static/css/main.5eabadf8.chunk.css",
+    "main.js": "/github-star-signs/static/js/main.5ae43952.chunk.js",
+    "main.js.map": "/github-star-signs/static/js/main.5ae43952.chunk.js.map",
+    "runtime-main.js": "/github-star-signs/static/js/runtime-main.ab8a8f37.js",
+    "runtime-main.js.map": "/github-star-signs/static/js/runtime-main.ab8a8f37.js.map",
+    "static/js/2.6360b404.chunk.js": "/github-star-signs/static/js/2.6360b404.chunk.js",
+    "static/js/2.6360b404.chunk.js.map": "/github-star-signs/static/js/2.6360b404.chunk.js.map",
+    "index.html": "/github-star-signs/index.html",
+    "precache-manifest.627e261e66562776e7d62fdd64d90576.js": "/github-star-signs/precache-manifest.627e261e66562776e7d62fdd64d90576.js",
+    "service-worker.js": "/github-star-signs/service-worker.js",
+    "static/css/main.5eabadf8.chunk.css.map": "/github-star-signs/static/css/main.5eabadf8.chunk.css.map",
+    "static/js/2.6360b404.chunk.js.LICENSE": "/github-star-signs/static/js/2.6360b404.chunk.js.LICENSE"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ab8a8f37.js",
+    "static/js/2.6360b404.chunk.js",
+    "static/css/main.5eabadf8.chunk.css",
+    "static/js/main.5ae43952.chunk.js"
+  ]
+}

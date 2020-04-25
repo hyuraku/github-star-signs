@@ -1,3 +1,7 @@
 a{
   color: black
 }
+
+.column{
+  overflow-wrap: break-word;
+}

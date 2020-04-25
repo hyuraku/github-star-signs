@@ -11,8 +11,4 @@
   .ui.container{
     width: 1000px;
   }
-
-  .ui.centered.cards{
-    justify-content: space-between;
-  }
 }

@@ -34,35 +34,26 @@ class App extends React.Component {
         err_msg: '',
         add_repo_size: response.data.length,
       })
+      while (this.state.add_repo_size === 90) {
+        let add_response = await github.get(`/users/${name}/starred`, {
+          params: {
+            per_page: max_repo_size,
+            page: this.state.page,
+          },
+        })
+        this.setState({
+          starred_repos: [...this.state.starred_repos, ...add_response.data],
+          page: this.state.page + 1,
+          add_repo_size: add_response.data.length,
+        })
+      }
     } catch (error) {
+      console.log(error)
       this.setState({
         name: name,
         http_status: error.response.status,
         err_msg: error.response.message,
       })
-    }
-  }
-
-  async additional(name, page) {
-    let add_response = await github.get(`/users/${name}/starred`, {
-      params: {
-        per_page: max_repo_size,
-        page: page,
-      },
-    })
-    this.setState({
-      starred_repos: this.state.starred_repos.concat(add_response.data),
-      page: this.state.page + 1,
-      add_repo_size: add_response.data.length,
-    })
-  }
-
-  componentDidUpdate(_, prevState) {
-    if (this.state.name !== prevState.name && prevState.name !== '') {
-      this.setState({ page: 1 })
-    }
-    if (this.state.name !== '' && this.state.add_repo_size === 90) {
-      this.additional(this.state.name, this.state.page)
     }
   }
 

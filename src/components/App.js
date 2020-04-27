@@ -48,7 +48,6 @@ class App extends React.Component {
         })
       }
     } catch (error) {
-      console.log(error)
       this.setState({
         name: name,
         http_status: error.response.status,

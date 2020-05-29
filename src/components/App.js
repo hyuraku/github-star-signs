@@ -5,6 +5,11 @@ import NoStarRepo from './NoStarRepo'
 import NameError from './NameError'
 import github from '../api/github'
 import Loading from './Loading'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom"
 
 const max_repo_size = 90
 class App extends React.Component {
@@ -60,28 +65,42 @@ class App extends React.Component {
     }
   }
 
+  returnHome (){
+    window.location.href = "/"
+  }
+
   render() {
-    let result = ''
-    if (this.state.loading === true) {
-      result = <Loading/>
-    } else {
-      if (this.state.name !== '') {
-        if (this.state.http_status === 200) {
-          if (this.state.starred_repos.length === 0) {
-            result = <NoStarRepo name={this.state.name} />
-          } else {
-            result = <RepoList repos={this.state.starred_repos} />
-          }
+  let result = ''
+  if (this.state.loading === true) {
+    result = <Loading/>
+  } else {
+    if (this.state.name !== '') {
+      if (this.state.http_status === 200) {
+        if (this.state.starred_repos.length === 0) {
+          result = <NoStarRepo name={this.state.name} />
+          window.setTimeout(this.returnHome, 4000)
         } else {
-          result = <NameError name={this.state.name} />
+          result = <RepoList repos={this.state.starred_repos} />
         }
+      } else {
+        result = <NameError name={this.state.name} />
+        window.setTimeout(this.returnHome, 4000)
       }
+    } else if (this.state.name === '' && window.location.pathname.includes("user")) {
+      window.setTimeout(this.returnHome, 3000)
     }
-    return (
-      <div>
-        <SearchBar onSubmit={this.onSearchSubmit} readOnly={this.state.loading}/>
-        {result}
-      </div>
+  }
+  return (
+    <Router>
+      <Switch>
+        <Route path="/" exact>
+          <SearchBar onSubmit={this.onSearchSubmit} readOnly={this.state.loading}/>
+        </Route>
+        <Route path="/user/:name">
+          {result}
+        </Route>
+      </Switch>
+    </Router>
     )
   }
 }

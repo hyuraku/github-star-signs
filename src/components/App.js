@@ -5,6 +5,7 @@ import NoStarRepo from './NoStarRepo'
 import NameError from './NameError'
 import github from '../api/github'
 import Loading from './Loading'
+import Footer from './Footer'
 
 const max_repo_size = 90
 class App extends React.Component {
@@ -81,6 +82,7 @@ class App extends React.Component {
       <div>
         <SearchBar onSubmit={this.onSearchSubmit} readOnly={this.state.loading}/>
         {result}
+        <Footer/>
       </div>
     )
   }

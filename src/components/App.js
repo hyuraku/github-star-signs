@@ -6,6 +6,7 @@ import NameError from './NameError'
 import github from '../api/github'
 import Loading from './Loading'
 import Footer from './Footer'
+import '../css/Top.css'
 
 const max_repo_size = 90
 class App extends React.Component {
@@ -22,7 +23,10 @@ class App extends React.Component {
   onSearchSubmit = async name => {
     let response = ''
     try {
-      this.setState({page: 1, loading: true})
+      this.setState({
+        page: 1,
+        loading: true
+      })
       response = await github.get(`/users/${name}/starred`,{
         params: {
           per_page: max_repo_size,
@@ -50,7 +54,9 @@ class App extends React.Component {
           add_repo_size: add_response.data.length,
         })
       }
-      this.setState({loading: false})
+      this.setState({
+        loading: false
+      })
     } catch (error) {
       this.setState({
         name: name,
@@ -79,7 +85,7 @@ class App extends React.Component {
       }
     }
     return (
-      <div>
+      <div className="top">
         <SearchBar onSubmit={this.onSearchSubmit} readOnly={this.state.loading}/>
         {result}
         <Footer/>

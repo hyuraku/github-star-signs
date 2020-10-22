@@ -1,7 +1,7 @@
 import React from 'react'
 import '../css/NameError.css'
 
-const NameError = props => {
+export const NameError = props => {
   const {name} = props
   return (
     <div className="ui container nameError">
@@ -12,5 +12,3 @@ const NameError = props => {
     </div>
   )
 }
-
-export default NameError

@@ -1,11 +1,11 @@
 import React from 'react'
-import SearchBar from './SearchBar'
-import RepoList from './RepoList'
-import NoStarRepo from './NoStarRepo'
-import NameError from './NameError'
+import { SearchBar } from './SearchBar'
+import { RepoList } from './RepoList'
+import { NoStarRepo } from './NoStarRepo'
+import { NameError } from './NameError'
 import github from '../api/github'
-import Loading from './Loading'
-import Footer from './Footer'
+import { Loading } from './Loading'
+import { Footer } from './Footer'
 import '../css/Top.css'
 
 const max_repo_size = 90

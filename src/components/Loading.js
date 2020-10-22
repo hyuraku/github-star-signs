@@ -1,7 +1,7 @@
 import React from 'react'
 import '../css/Loading.css'
 
-const Loading = () => {
+export const Loading = () => {
   return (<div className="ui loading">
     <div className="ui active inverted dimmer">
       <div className="ui large text loader">Loading</div>
@@ -9,5 +9,3 @@ const Loading = () => {
     <p></p>
   </div>)
 }
-
-export default Loading

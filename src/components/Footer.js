@@ -1,7 +1,7 @@
 import React from 'react'
 import '../css/Footer.css'
 
-const Footer = () => {
+export const Footer = () => {
   return (
       <footer>
         GitHub Star Sign is built with <Link url="https://reactjs.org/" name="React"/> .
@@ -19,5 +19,3 @@ const Link = (props) => {
     </>
   )
 }
-
-export default Footer

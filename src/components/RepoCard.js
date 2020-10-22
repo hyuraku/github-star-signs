@@ -1,7 +1,7 @@
 import React from 'react'
 import '../css/RepoCard.css'
 
-const RepoCard = props => {
+export const RepoCard = props => {
   const {
     name,
     html_url,
@@ -30,5 +30,3 @@ const RepoCard = props => {
     </div>
   )
 }
-
-export default RepoCard

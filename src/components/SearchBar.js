@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import '../css/SearchBar.css'
 
-const SearchBar = props => {
+export const SearchBar = props => {
   const [name, setName] = useState("")
   const onFormSubmit = event => {
     event.preventDefault()
@@ -16,5 +16,3 @@ const SearchBar = props => {
     </form>
   </div>)
 }
-
-export default SearchBar

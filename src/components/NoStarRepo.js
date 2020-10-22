@@ -1,7 +1,7 @@
 import React from 'react'
 import '../css/NoStarRepo.css'
 
-const NoStarRepo = props => {
+export const NoStarRepo = props => {
   const {name} = props
   return (
     < div className = "ui container NoStarRepo" >
@@ -9,5 +9,3 @@ const NoStarRepo = props => {
     </div>
   )
 }
-
-export default NoStarRepo

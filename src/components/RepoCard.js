@@ -1,7 +1,7 @@
 import React from 'react'
 import '../css/RepoCard.css'
 
-export const RepoCard = props => {
+export const RepoCard = (props) => {
   const {
     name,
     html_url,

@@ -17,22 +17,22 @@ class App extends React.Component {
     http_status: 200,
     err_msg: '',
     page: 1,
-    loading: false
+    loading: false,
   }
 
-  onSearchSubmit = async name => {
+  onSearchSubmit = async (name) => {
     let response = ''
     try {
       this.setState({
         page: 1,
-        loading: true
+        loading: true,
       })
-      response = await github.get(`/users/${name}/starred`,{
+      response = await github.get(`/users/${name}/starred`, {
         params: {
           per_page: max_repo_size,
-          page: 1
-        }
-      });
+          page: 1,
+        },
+      })
       this.setState({
         name: name,
         http_status: response.status,
@@ -55,14 +55,14 @@ class App extends React.Component {
         })
       }
       this.setState({
-        loading: false
+        loading: false,
       })
     } catch (error) {
       this.setState({
         name: name,
         http_status: error.response.status,
         err_msg: error.response.message,
-        loading: false
+        loading: false,
       })
     }
   }
@@ -70,7 +70,7 @@ class App extends React.Component {
   render() {
     let result = ''
     if (this.state.loading === true) {
-      result = <Loading/>
+      result = <Loading />
     } else {
       if (this.state.name !== '') {
         if (this.state.http_status === 200) {
@@ -86,9 +86,12 @@ class App extends React.Component {
     }
     return (
       <div className="top">
-        <SearchBar onSubmit={this.onSearchSubmit} readOnly={this.state.loading}/>
+        <SearchBar
+          onSubmit={this.onSearchSubmit}
+          readOnly={this.state.loading}
+        />
         {result}
-        <Footer/>
+        <Footer />
       </div>
     )
   }

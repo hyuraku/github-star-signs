@@ -1,14 +1,14 @@
-@media screen and (min-width:768px){
-  .ui.form{
+@media screen and (min-width: 768px) {
+  .ui.form {
     width: 50%;
     margin: auto;
   }
 
-  .ui.form .field{
+  .ui.form .field {
     text-align: center;
   }
 
-  .ui.container{
+  .ui.container {
     width: 1000px;
   }
 }

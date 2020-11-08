@@ -1,11 +1,11 @@
-a{
-  color: black
+a {
+  color: black;
 }
 
-.column{
+.column {
   overflow-wrap: break-word;
 }
 
-.description{
+.description {
   overflow-wrap: break-word;
 }

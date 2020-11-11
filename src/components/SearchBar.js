@@ -12,13 +12,16 @@ export const SearchBar = (props) => {
       <form onSubmit={onFormSubmit} className="ui form">
         <div className="field">
           <h1>Enter GitHub username</h1>
-          <input
-            type="text"
-            autoFocus="autoFocus"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            readOnly={props.readOnly}
-          />
+          <label>
+            <input
+              type="text"
+              autoFocus="autoFocus"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              readOnly={props.readOnly}
+              placeholder="Your GitHub username"
+            />
+          </label>
         </div>
       </form>
     </div>

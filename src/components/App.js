@@ -71,8 +71,13 @@ class App extends React.Component {
           onSubmit={this.onSearchSubmit}
           readOnly={this.state.loading}
         />
-        <Result loading={this.state.loading} http_status={this.state.http_status} name={this.state.name} starred_repos={this.state.starred_repos}/> 
-        <Footer/>
+        <Result
+          loading={this.state.loading}
+          http_status={this.state.http_status}
+          name={this.state.name}
+          starred_repos={this.state.starred_repos}
+        />
+        <Footer />
       </div>
     )
   }

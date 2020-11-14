@@ -4,10 +4,8 @@ import { NoStarRepo } from './NoStarRepo'
 import { NameError } from './NameError'
 import { Loading } from './Loading'
 
-
-
 export const Result = (props) => {
-  const{ loading, name, http_status, starred_repos } = props
+  const { loading, name, http_status, starred_repos } = props
   if (loading === true) return <Loading />
   if (name !== '') {
     if (http_status === 200) {
@@ -20,5 +18,5 @@ export const Result = (props) => {
       return <NameError name={name} />
     }
   }
-  return ""
+  return ''
 }

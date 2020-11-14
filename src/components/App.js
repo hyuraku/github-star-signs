@@ -1,10 +1,7 @@
 import React from 'react'
 import { SearchBar } from './SearchBar'
-import { RepoList } from './RepoList'
-import { NoStarRepo } from './NoStarRepo'
-import { NameError } from './NameError'
 import github from '../api/github'
-import { Loading } from './Loading'
+import { Result } from './Result'
 import { Footer } from './Footer'
 import '../css/Top.css'
 
@@ -68,29 +65,18 @@ class App extends React.Component {
   }
 
   render() {
-    let result = ''
-    if (this.state.loading === true) {
-      result = <Loading />
-    } else {
-      if (this.state.name !== '') {
-        if (this.state.http_status === 200) {
-          if (this.state.starred_repos.length === 0) {
-            result = <NoStarRepo name={this.state.name} />
-          } else {
-            result = <RepoList repos={this.state.starred_repos} />
-          }
-        } else {
-          result = <NameError name={this.state.name} />
-        }
-      }
-    }
     return (
       <div className="top">
         <SearchBar
           onSubmit={this.onSearchSubmit}
           readOnly={this.state.loading}
         />
-        {result}
+        <Result
+          loading={this.state.loading}
+          http_status={this.state.http_status}
+          name={this.state.name}
+          starred_repos={this.state.starred_repos}
+        />
         <Footer />
       </div>
     )

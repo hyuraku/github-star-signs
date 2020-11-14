@@ -1,7 +1,7 @@
 import React from 'react'
 import { SearchBar } from './SearchBar'
 import github from '../api/github'
-import { Result } from './Result'
+import { MainContent } from './MainContent'
 import { Footer } from './Footer'
 import '../css/Top.css'
 
@@ -71,7 +71,7 @@ class App extends React.Component {
           onSubmit={this.onSearchSubmit}
           readOnly={this.state.loading}
         />
-        <Result
+        <MainContent
           loading={this.state.loading}
           http_status={this.state.http_status}
           name={this.state.name}

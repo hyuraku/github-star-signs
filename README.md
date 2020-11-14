@@ -1,6 +1,6 @@
 # github-star-signs
 
-Show GitHub Repository you starred
+Show GitHub Repositories you starred
 
 live at https://hyuraku.github.io/github-star-signs/
 

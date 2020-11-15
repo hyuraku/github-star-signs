@@ -5,7 +5,7 @@ import { MainContent } from './MainContent'
 import { Footer } from './Footer'
 import '../css/Top.css'
 
-const max_repo_size = 90
+const maxRepoSize = 90
 class App extends React.Component {
   state = {
     starredRepos: [],
@@ -26,7 +26,7 @@ class App extends React.Component {
       })
       response = await github.get(`/users/${name}/starred`, {
         params: {
-          per_page: max_repo_size,
+          per_page: maxRepoSize,
           page: 1,
         },
       })
@@ -38,10 +38,10 @@ class App extends React.Component {
         errMsg: '',
         addRepoSize: response.data.length,
       })
-      while (this.state.addRepoSize === max_repo_size) {
+      while (this.state.addRepoSize === maxRepoSize) {
         let add_response = await github.get(`/users/${name}/starred`, {
           params: {
-            per_page: max_repo_size,
+            per_page: maxRepoSize,
             page: this.state.page,
           },
         })

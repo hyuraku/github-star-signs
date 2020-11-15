@@ -8,11 +8,11 @@ import '../css/Top.css'
 const max_repo_size = 90
 class App extends React.Component {
   state = {
-    starred_repos: [],
-    add_repo_size: 0,
+    starredRepos: [],
+    addRepoSize: 0,
     name: '',
-    http_status: 200,
-    err_msg: '',
+    httpStatus: 200,
+    errMsg: '',
     page: 1,
     loading: false,
   }
@@ -32,13 +32,13 @@ class App extends React.Component {
       })
       this.setState({
         name: name,
-        http_status: response.status,
-        starred_repos: response.data,
+        httpStatus: response.status,
+        starredRepos: response.data,
         page: this.state.page + 1,
-        err_msg: '',
-        add_repo_size: response.data.length,
+        errMsg: '',
+        addRepoSize: response.data.length,
       })
-      while (this.state.add_repo_size === max_repo_size) {
+      while (this.state.addRepoSize === max_repo_size) {
         let add_response = await github.get(`/users/${name}/starred`, {
           params: {
             per_page: max_repo_size,
@@ -46,9 +46,9 @@ class App extends React.Component {
           },
         })
         this.setState({
-          starred_repos: [...this.state.starred_repos, ...add_response.data],
+          starredRepos: [...this.state.starredRepos, ...add_response.data],
           page: this.state.page + 1,
-          add_repo_size: add_response.data.length,
+          addRepoSize: add_response.data.length,
         })
       }
       this.setState({
@@ -57,8 +57,8 @@ class App extends React.Component {
     } catch (error) {
       this.setState({
         name: name,
-        http_status: error.response.status,
-        err_msg: error.response.message,
+        httpStatus: error.response.status,
+        errMsg: error.response.message,
         loading: false,
       })
     }
@@ -73,9 +73,9 @@ class App extends React.Component {
         />
         <MainContent
           loading={this.state.loading}
-          http_status={this.state.http_status}
+          httpStatus={this.state.httpStatus}
           name={this.state.name}
-          starred_repos={this.state.starred_repos}
+          starredRepos={this.state.starredRepos}
         />
         <Footer />
       </div>

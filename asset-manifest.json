@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/github-star-signs/static/css/main.6200d92d.chunk.css",
-    "main.js": "/github-star-signs/static/js/main.fb914575.chunk.js",
-    "main.js.map": "/github-star-signs/static/js/main.fb914575.chunk.js.map",
+    "main.js": "/github-star-signs/static/js/main.a899b3cc.chunk.js",
+    "main.js.map": "/github-star-signs/static/js/main.a899b3cc.chunk.js.map",
     "runtime-main.js": "/github-star-signs/static/js/runtime-main.301e5fd9.js",
     "runtime-main.js.map": "/github-star-signs/static/js/runtime-main.301e5fd9.js.map",
     "static/js/2.25bfe6ac.chunk.js": "/github-star-signs/static/js/2.25bfe6ac.chunk.js",
     "static/js/2.25bfe6ac.chunk.js.map": "/github-star-signs/static/js/2.25bfe6ac.chunk.js.map",
     "index.html": "/github-star-signs/index.html",
-    "precache-manifest.a4342ba6fb6f274b75035ff8582dbe60.js": "/github-star-signs/precache-manifest.a4342ba6fb6f274b75035ff8582dbe60.js",
+    "precache-manifest.0ae6e2bf25759b5761bc8cf8b932e83b.js": "/github-star-signs/precache-manifest.0ae6e2bf25759b5761bc8cf8b932e83b.js",
     "service-worker.js": "/github-star-signs/service-worker.js",
     "static/css/main.6200d92d.chunk.css.map": "/github-star-signs/static/css/main.6200d92d.chunk.css.map",
     "static/js/2.25bfe6ac.chunk.js.LICENSE.txt": "/github-star-signs/static/js/2.25bfe6ac.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.301e5fd9.js",
     "static/js/2.25bfe6ac.chunk.js",
     "static/css/main.6200d92d.chunk.css",
-    "static/js/main.fb914575.chunk.js"
+    "static/js/main.a899b3cc.chunk.js"
   ]
 }

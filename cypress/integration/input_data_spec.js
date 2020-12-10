@@ -13,6 +13,11 @@ describe('input user name', function () {
       cy.wait('@getStars')
       cy.wait('@getStars')
       cy.wait('@getStars')
-    })    
+    })
+    cy.get('.card').last().within(() => {
+      cy.get('.ui.header').contains('developer-roadmap')
+      cy.get('.column').contains('kamranahmedse')
+      cy.get('.ui.description').contains('Roadmap to becoming a web developer in 2020')
+    })
   })
 })

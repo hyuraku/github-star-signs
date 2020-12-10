@@ -25,3 +25,4 @@ yarn-error.log*
 cypress/integration/examples/
 cypress/videos/
 cypress/fixtures/example.*
+cypress/screenshots/

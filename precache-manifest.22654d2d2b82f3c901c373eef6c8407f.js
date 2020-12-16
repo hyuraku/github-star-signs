@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "e65dddf12a0cf7935e54a278339087f5",
+    "revision": "eff99e7782313516dafeb4588cef963c",
     "url": "/github-star-signs/index.html"
   },
   {
-    "revision": "44018ed8157d5402e1a9",
+    "revision": "283bd9972e16809445cf",
     "url": "/github-star-signs/static/css/main.6200d92d.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/github-star-signs/static/js/2.25bfe6ac.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "44018ed8157d5402e1a9",
-    "url": "/github-star-signs/static/js/main.a899b3cc.chunk.js"
+    "revision": "283bd9972e16809445cf",
+    "url": "/github-star-signs/static/js/main.c65b9680.chunk.js"
   },
   {
     "revision": "311d67875c968d8ac57a",

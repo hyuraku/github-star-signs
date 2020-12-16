@@ -1,7 +1,11 @@
 import React from 'react'
 import '../css/NameError.css'
 
-export const NameError = (props) => {
+type Props = {
+  name: string
+}
+
+export const NameError: React.FC<Props> = (props) => {
   const { name } = props
   return (
     <div className="ui container nameError">

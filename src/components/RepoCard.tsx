@@ -3,11 +3,11 @@ import '../css/RepoCard.css'
 
 type Props = {
   repo: {
-    name: string,
-    html_url: string,
-    description: string,
-    owner: any,
-    language: string,
+    name: string
+    html_url: string
+    description: string
+    owner: any
+    language: string
     stargazers_count: number
   }
 }

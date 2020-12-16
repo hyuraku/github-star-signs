@@ -11,8 +11,8 @@ export const Footer = () => {
   )
 }
 
-type Props ={
-  url: string,
+type Props = {
+  url: string
   name: string
 }
 

@@ -6,12 +6,12 @@ type Props = {
 }
 
 interface RepoCard {
-  id: string,
-  name: string,
-  html_url: string,
-  description: string,
-  owner: any,
-  language: string,
+  id: string
+  name: string
+  html_url: string
+  description: string
+  owner: any
+  language: string
   stargazers_count: number
 }
 

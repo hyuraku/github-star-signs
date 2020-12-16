@@ -1,7 +1,18 @@
 import React from 'react'
 import '../css/RepoCard.css'
 
-export const RepoCard = (props) => {
+type Props = {
+  repo: {
+    name: string,
+    html_url: string,
+    description: string,
+    owner: any,
+    language: string,
+    stargazers_count: number
+  }
+}
+
+export const RepoCard: React.FC<Props> = (props) => {
   const {
     name,
     html_url,

@@ -1,7 +1,11 @@
 import React from 'react'
 import '../css/NoStarRepo.css'
 
-export const NoStarRepo = (props) => {
+type Props = {
+  name: string
+}
+
+export const NoStarRepo: React.FC<Props> = (props) => {
   const { name } = props
   return (
     <div className="ui container NoStarRepo">

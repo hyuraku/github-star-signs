@@ -11,12 +11,17 @@ export const Footer = () => {
   )
 }
 
-const Link = (props) => {
+type Props = {
+  url: string
+  name: string
+}
+
+const Link: React.FC<Props> = (props) => {
   const { url, name } = props
   return (
     <>
       {/* eslint-disable-next-line */}
-      <a herf={url} target="_blank" rel="noopener noreferrer">
+      <a href={url} target="_blank" rel="noopener noreferrer">
         {name}
       </a>
     </>

@@ -16,8 +16,7 @@ type Props = {
   name: string
 }
 
-const Link: React.FC<Props> = (props) => {
-  const { url, name } = props
+const Link: React.FC<Props> = ({ url, name }) => {
   return (
     <>
       {/* eslint-disable-next-line */}

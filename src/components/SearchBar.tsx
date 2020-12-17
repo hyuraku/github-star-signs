@@ -1,9 +1,14 @@
 import React, { useState } from 'react'
 import '../css/SearchBar.css'
 
-export const SearchBar = (props) => {
+type Props = {
+  readOnly: boolean
+  onSubmit: any
+}
+
+export const SearchBar: React.FC<Props>  = (props) => {
   const [name, setName] = useState('')
-  const onFormSubmit = (event) => {
+  const onFormSubmit = (event: any) => {
     event.preventDefault()
     props.onSubmit(name)
   }
@@ -15,7 +20,7 @@ export const SearchBar = (props) => {
           <label>
             <input
               type="text"
-              autoFocus="autoFocus"
+              autoFocus
               value={name}
               onChange={(e) => setName(e.target.value)}
               readOnly={props.readOnly}

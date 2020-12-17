@@ -5,8 +5,7 @@ type Props = {
   name: string
 }
 
-export const NoStarRepo: React.FC<Props> = (props) => {
-  const { name } = props
+export const NoStarRepo: React.FC<Props> = ({ name }) => {
   return (
     <div className="ui container NoStarRepo">
       <h2>

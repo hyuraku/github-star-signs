@@ -5,8 +5,7 @@ type Props = {
   name: string
 }
 
-export const NameError: React.FC<Props> = (props) => {
-  const { name } = props
+export const NameError: React.FC<Props> = ({ name }) => {
   return (
     <div className="ui container nameError">
       <h2>

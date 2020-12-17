@@ -1,11 +1,10 @@
-import React, { ReactEventHandler } from 'react'
+import React from 'react'
 import { RepoList } from './RepoList'
 import { NoStarRepo } from './NoStarRepo'
 import { NameError } from './NameError'
 import { Loading } from './Loading'
 
 type Props = {
-  children?: any;
   loading: boolean,
   name: string,
   httpStatus: number,

@@ -17,8 +17,8 @@ class App extends React.Component {
     loading: false,
   }
 
-  onSearchSubmit = async (name) => {
-    let response = ''
+  onSearchSubmit = async (name: string) => {
+    let response:any = ""
     try {
       this.setState({
         page: 1,

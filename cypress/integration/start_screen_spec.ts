@@ -1,3 +1,5 @@
+export {}
+
 describe('start screen test', function () {
   beforeEach(() => {
     cy.visit('/')

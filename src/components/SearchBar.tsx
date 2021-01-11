@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import '../css/SearchBar.css'
 
-type Props = {  
-  onSubmit: (arg0: string) => void,
-  readOnly: boolean,
+type Props = {
+  onSubmit: (arg0: string) => void
+  readOnly: boolean
 }
 
-export const SearchBar: React.FC<Props>  = (props) => {
+export const SearchBar: React.FC<Props> = (props) => {
   const [name, setName] = useState('')
   const onFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()

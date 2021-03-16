@@ -5,7 +5,7 @@ import { MainContent } from './MainContent'
 import { Footer } from './Footer'
 import '../css/Top.css'
 
-const maxRepoSize = 90
+const maxRepoSize = 100
 class App extends React.Component {
   state = {
     starredRepos: [],

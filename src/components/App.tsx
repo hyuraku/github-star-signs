@@ -1,6 +1,6 @@
 import React from 'react'
 import { SearchBar } from './SearchBar'
-import github from '../api/github'
+import { github } from '../api/github'
 import { MainContent } from './MainContent'
 import { Footer } from './Footer'
 import '../css/Top.css'

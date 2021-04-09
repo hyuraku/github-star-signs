@@ -5,6 +5,7 @@ type Props = {
   repos: Array<RepoCard>
 }
 
+// eslint-disable-next-line
 interface RepoCard {
   id: string
   name: string

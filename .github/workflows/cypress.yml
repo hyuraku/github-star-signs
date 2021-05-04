@@ -25,4 +25,4 @@ jobs:
           start: yarn start
           browser: firefox
           wait-on: 'http://localhost:3000'
-          spec: cypress/integration/start_screen_spec.ts,cypress/integration/input_data_spec.ts
+          project: ./cypress/integration

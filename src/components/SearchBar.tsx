@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import '../css/SearchBar.css'
 
-type Props = {
+interface Props {
   onSubmit: (arg0: string) => void
   readOnly: boolean
 }

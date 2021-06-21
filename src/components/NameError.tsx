@@ -1,7 +1,7 @@
 import React from 'react'
 import '../css/NameError.css'
 
-type Props = {
+interface Props {
   name: string
 }
 

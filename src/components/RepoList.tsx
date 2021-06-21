@@ -1,7 +1,7 @@
 import React from 'react'
 import { RepoCard } from './RepoCard'
 
-type Props = {
+interface Props {
   repos: Array<RepoCard>
 }
 
@@ -11,7 +11,9 @@ interface RepoCard {
   name: string
   html_url: string
   description: string
-  owner: any
+  owner: {
+    login: string
+  }
   language: string
   stargazers_count: number
 }

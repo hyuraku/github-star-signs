@@ -1,12 +1,14 @@
 import React from 'react'
 import '../css/RepoCard.css'
 
-type Props = {
+interface Props {
   repo: {
     name: string
     html_url: string
     description: string
-    owner: any
+    owner: {
+      login: string
+    }
     language: string
     stargazers_count: number
   }

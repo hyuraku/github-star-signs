@@ -5,7 +5,7 @@ import { NameError } from './NameError'
 import { Loading } from './Loading'
 import { NoContent } from './NoContent'
 
-type Props = {
+interface Props {
   loading: boolean,
   name: string,
   httpStatus: number,

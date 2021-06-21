@@ -1,7 +1,7 @@
 import React from 'react'
 import '../css/NoStarRepo.css'
 
-type Props = {
+interface Props {
   name: string
 }
 

@@ -33,4 +33,4 @@ export const SearchBar: React.FC<Props> = React.memo((props) => {
   )
 })
 
-SearchBar.displayName = "SearchBar"
+SearchBar.displayName = 'SearchBar'

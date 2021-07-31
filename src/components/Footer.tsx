@@ -11,7 +11,7 @@ export const Footer = React.memo(() => {
   )
 })
 
-Footer.displayName = "Footer"
+Footer.displayName = 'Footer'
 
 type Props = {
   url: string
@@ -29,4 +29,4 @@ const Link: React.FC<Props> = React.memo(({ url, name }) => {
   )
 })
 
-Link.displayName = "Link"
+Link.displayName = 'Link'

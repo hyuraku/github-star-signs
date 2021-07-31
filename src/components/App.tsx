@@ -18,7 +18,7 @@ class App extends React.Component {
   }
 
   onSearchSubmit = async (name: string) => {
-    let response: any = ""
+    let response: any = ''
     try {
       this.setState({
         page: 1,

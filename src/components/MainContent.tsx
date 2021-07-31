@@ -6,13 +6,18 @@ import { Loading } from './Loading'
 import { NoContent } from './NoContent'
 
 interface Props {
-  loading: boolean,
-  name: string,
-  httpStatus: number,
+  loading: boolean
+  name: string
+  httpStatus: number
   starredRepos: any
 }
 
-export const MainContent: React.FC<Props> = ({ loading, name, httpStatus, starredRepos }): JSX.Element => {
+export const MainContent: React.FC<Props> = ({
+  loading,
+  name,
+  httpStatus,
+  starredRepos,
+}): JSX.Element => {
   if (loading === true) return <Loading />
   if (name === '') return <NoContent />
   if (httpStatus !== 200) return <NameError name={name} />

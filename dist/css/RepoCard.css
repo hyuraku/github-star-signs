@@ -1,0 +1,11 @@
+a {
+  color: black;
+}
+
+.column {
+  overflow-wrap: break-word;
+}
+
+.description {
+  overflow-wrap: break-word;
+}

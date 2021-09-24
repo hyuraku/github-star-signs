@@ -1,0 +1,18 @@
+footer {
+  font-size: 17px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  padding: 10px 30px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  background: #f1f1f1;
+  margin-top: 10px;
+  bottom: 0;
+  margin-bottom: -50px;
+}
+
+a {
+  color: #0082c8;
+  text-decoration: none;
+}

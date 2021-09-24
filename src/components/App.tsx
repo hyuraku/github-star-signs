@@ -54,7 +54,7 @@ class App extends React.Component {
       this.setState({
         loading: false,
       })
-    } catch (error) {
+    } catch (error: any) {
       this.setState({
         name: name,
         httpStatus: error.response.status,

@@ -44,6 +44,7 @@
     "@types/snowpack-env": "^2.3.2",
     "cypress": "^6.1.0",
     "gh-pages": "^2.2.0",
+    "postcss": "^8.3.7",
     "prettier": "2.1.1",
     "serve": "^11.3.2",
     "snowpack": "^3.0.1",

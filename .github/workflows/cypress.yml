@@ -6,6 +6,9 @@ jobs:
   cypress:
     name: cypress
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
     steps:
       - name: Checkout
         uses: actions/checkout@v1
@@ -26,3 +29,11 @@ jobs:
           browser: firefox
           wait-on: 'http://localhost:3000'
           spec: cypress/integration/start_screen_spec.ts,cypress/integration/input_data_spec.ts
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm install
+      - run: npm ci
+      - run: npm run build --if-present

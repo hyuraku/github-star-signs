@@ -8,6 +8,7 @@ describe('input user name', function () {
   it('input user name', () => {
     cy.get('.top label').within(() => {
       cy.get('input').type('hyuraku').type('{enter}')
+      cy.wait(5000)
     })
     cy.get('.card')
       .last()

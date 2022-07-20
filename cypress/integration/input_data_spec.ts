@@ -9,9 +9,7 @@ describe('input user name', function () {
     cy.get('.top label').within(() => {
       cy.intercept('/users').as('getStars')
       cy.get('input').type('hyuraku').type('{enter}')
-      for (let i = 0; i < 4; i++) {
-        cy.wait('@getStars')
-      }
+      cy.wait(10000)
     })
     cy.get('.card')
       .last()

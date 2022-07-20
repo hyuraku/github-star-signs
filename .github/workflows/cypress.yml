@@ -21,6 +21,7 @@ jobs:
           headless: true
           wait-on: 'http://localhost:3000'
           spec: cypress/integration/start_screen_spec.ts,cypress/integration/input_data_spec.ts
+          config-file: cypress.config.ts
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1

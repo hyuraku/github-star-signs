@@ -20,7 +20,7 @@ jobs:
           browser: chrome
           headless: true
           wait-on: 'http://localhost:3000'
-          spec: cypress/integration/start_screen_spec.ts,cypress/integration/input_data_spec.ts
+          spec: cypress/e2e/start_screen_spec.cy.ts,cypress/e2e/input_data_spec.cy.ts
           config-file: cypress.config.ts
 
       - name: Use Node.js ${{ matrix.node-version }}

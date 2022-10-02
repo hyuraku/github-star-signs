@@ -8,8 +8,8 @@ import '../css/Top.css'
 const maxRepoSize = 100
 
 type responseType = {
-    status: string,
-    data: any,
+  status: string,
+  data: any,
 }
 
 type errorType = { response: {status: string, message: string}}

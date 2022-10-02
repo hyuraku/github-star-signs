@@ -6,6 +6,13 @@ import { Footer } from './Footer'
 import '../css/Top.css'
 
 const maxRepoSize = 100
+
+type responseType = {
+  status: string,
+  data: any,
+}
+
+type errorType = { response: {status: string, message: string}}
 class App extends React.Component {
   state = {
     starredRepos: [],
@@ -18,7 +25,7 @@ class App extends React.Component {
   }
 
   onSearchSubmit = async (name: string) => {
-    let response: any = ''
+    let response = {} as responseType
     try {
       this.setState({
         page: 1,
@@ -54,11 +61,11 @@ class App extends React.Component {
       this.setState({
         loading: false,
       })
-    } catch (error: any) {
+    } catch (error) {
       this.setState({
         name: name,
-        httpStatus: error.response.status,
-        errMsg: error.response.message,
+        httpStatus: (error as errorType).response.status,
+        errMsg: (error as errorType).response.message,
         loading: false,
       })
     }

@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "http://hyuraku.github.io/github-star-signs",
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^1.0.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   },

@@ -2,10 +2,13 @@ name: Cypress
 
 on: [push]
 
+permissions:
+  contents: read
+
 jobs:
   cypress:
     name: cypress
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     strategy:
       matrix:
         node-version: [12.x]

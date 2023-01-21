@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        node-version: [12.x]
+        node-version: [16.x]
     steps:
       - name: Checkout
         uses: actions/checkout@v1
@@ -22,7 +22,7 @@ jobs:
           start: yarn start
           browser: chrome
           headless: true
-          wait-on: 'http://localhost:3000'
+          wait-on: 'http://localhost:5173'
           spec: cypress/e2e/start_screen_spec.cy.ts,cypress/e2e/input_data_spec.cy.ts
           config-file: cypress.config.ts
 

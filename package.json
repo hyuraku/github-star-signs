@@ -4,18 +4,20 @@
   "private": true,
   "homepage": "http://hyuraku.github.io/github-star-signs",
   "dependencies": {
+    "@vitejs/plugin-react": "^3.0.1",
     "axios": "^1.0.0",
     "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react-dom": "^16.12.0",
+    "vite": "^4.0.4"
   },
   "scripts": {
-    "start": "snowpack dev --reload",
-    "build": "snowpack build",
     "deploy": "gh-pages -d build",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "cy:run:chrome": "cypress run --browser chrome",
-    "cy:run:firefox": "cypress run --browser firefox"
+    "cy:run:firefox": "cypress run --browser firefox",
+    "start": "vite",
+    "build": "tsc --noEmit && vite build"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -22,7 +22,7 @@ jobs:
           start: yarn start
           browser: chrome
           headless: true
-          wait-on: 'http://localhost:3000'
+          wait-on: 'http://localhost:5173'
           spec: cypress/e2e/start_screen_spec.cy.ts,cypress/e2e/input_data_spec.cy.ts
           config-file: cypress.config.ts
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import '../css/RepoCard.css'
 
-interface Props {
+export type RepoCardType = {
   repo: {
     name: string
     html_url: string
@@ -14,7 +14,7 @@ interface Props {
   }
 }
 
-export const RepoCard: React.FC<Props> = (props) => {
+export const RepoCard: React.FC<RepoCardType> = ({repo}) => {
   const {
     name,
     html_url,
@@ -22,7 +22,7 @@ export const RepoCard: React.FC<Props> = (props) => {
     owner,
     language,
     stargazers_count,
-  } = props.repo
+  } = repo
   return (
     <div className="card">
       <div className="content">

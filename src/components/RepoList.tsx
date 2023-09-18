@@ -18,9 +18,10 @@ interface RepoCard {
   stargazers_count: number
 }
 
-export const RepoList: React.FC<Props> = (props) => {
-  const repos = props.repos.map((repo: RepoCard) => {
-    return <RepoCard key={repo.id} repo={repo} />
-  })
-  return <div className="ui container cards">{repos}</div>
-}
+export const RepoList: React.FC<Props> = ({ repos }) => (
+  <div className="ui container cards">
+    {repos.map((repo) => (
+      <RepoCard key={repo.id} repo={repo} />
+    ))}
+  </div>
+)

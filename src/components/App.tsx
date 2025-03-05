@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { SearchBar } from './SearchBar'
 import { github } from '../api/github'
 import { MainContent } from './MainContent'
@@ -8,86 +8,75 @@ import '../css/Top.css'
 const maxRepoSize = 100
 
 type responseType = {
-  status: string,
+  status: number,
   data: any,
 }
 
-type errorType = { response: {status: string, message: string}}
-class App extends React.Component {
-  state = {
-    starredRepos: [],
-    addRepoSize: 0,
-    name: '',
-    httpStatus: 200,
-    errMsg: '',
-    page: 1,
-    loading: false,
-  }
+type errorType = { response: {status: number, message: string}}
 
-  onSearchSubmit = async (name: string) => {
-    let response = {} as responseType
+const App: React.FC = () => {
+  const [starredRepos, setStarredRepos] = useState<any[]>([]);
+  const [name, setName] = useState('');
+  const [httpStatus, setHttpStatus] = useState(200);
+  const [loading, setLoading] = useState(false);
+
+  const onSearchSubmit = async (searchName: string) => {
+    let response = {} as responseType;
     try {
-      this.setState({
-        page: 1,
-        loading: true,
-      })
-      response = await github.get(`/users/${name}/starred`, {
+      setLoading(true);
+      let currentPage = 1;
+
+      response = await github.get(`/users/${searchName}/starred`, {
         params: {
           per_page: maxRepoSize,
           page: 1,
         },
-      })
-      this.setState({
-        name: name,
-        httpStatus: response.status,
-        starredRepos: response.data,
-        page: this.state.page + 1,
-        errMsg: '',
-        addRepoSize: response.data.length,
-      })
-      while (this.state.addRepoSize === maxRepoSize) {
-        let add_response = await github.get(`/users/${name}/starred`, {
+      });
+      
+      setName(searchName);
+      setHttpStatus(response.status);
+      setStarredRepos(response.data);
+      
+      // manage page and additional data size with local variables
+      currentPage += 1;
+      let currentAddRepoSize = response.data.length;
+      
+      while (currentAddRepoSize === maxRepoSize) {
+        const addResponse = await github.get(`/users/${searchName}/starred`, {
           params: {
             per_page: maxRepoSize,
-            page: this.state.page,
+            page: currentPage,
           },
-        })
-        this.setState({
-          starredRepos: [...this.state.starredRepos, ...add_response.data],
-          page: this.state.page + 1,
-          addRepoSize: add_response.data.length,
-        })
+        });
+        
+        setStarredRepos(prevRepos => [...prevRepos, ...addResponse.data]);
+        currentPage++;
+        currentAddRepoSize = addResponse.data.length;
       }
-      this.setState({
-        loading: false,
-      })
+      
+      setLoading(false);
     } catch (error) {
-      this.setState({
-        name: name,
-        httpStatus: (error as errorType).response.status,
-        errMsg: (error as errorType).response.message,
-        loading: false,
-      })
+      setName(searchName);
+      setHttpStatus((error as errorType).response.status);
+      setLoading(false);
     }
-  }
+  };
 
-  render() {
-    return (
-      <div className="top">
-        <SearchBar
-          onSubmit={this.onSearchSubmit}
-          readOnly={this.state.loading}
-        />
-        <MainContent
-          loading={this.state.loading}
-          httpStatus={this.state.httpStatus}
-          name={this.state.name}
-          starredRepos={this.state.starredRepos}
-        />
-        <Footer />
-      </div>
-    )
-  }
-}
+  return (
+    <div className="top">
+      <SearchBar
+        onSubmit={onSearchSubmit}
+        readOnly={loading}
+      />
+      <MainContent
+        loading={loading}
+        httpStatus={httpStatus}
+        name={name}
+        starredRepos={starredRepos}
+      />
+      <Footer />
+    </div>
+  );
+};
 
-export default App
+export default App;

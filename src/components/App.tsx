@@ -3,25 +3,20 @@ import { SearchBar } from './SearchBar'
 import { github } from '../api/github'
 import { MainContent } from './MainContent'
 import { Footer } from './Footer'
+import { GitHubRepository, ApiResponse, ApiError } from '../types/github'
 import '../css/Top.css'
 
 const maxRepoSize = 100
 
-type responseType = {
-  status: number,
-  data: any,
-}
-
-type errorType = { response: {status: number, message: string}}
 
 const App: React.FC = () => {
-  const [starredRepos, setStarredRepos] = useState<any[]>([]);
+  const [starredRepos, setStarredRepos] = useState<GitHubRepository[]>([]);
   const [name, setName] = useState('');
   const [httpStatus, setHttpStatus] = useState(200);
   const [loading, setLoading] = useState(false);
 
   const onSearchSubmit = async (searchName: string) => {
-    let response = {} as responseType;
+    let response = {} as ApiResponse<GitHubRepository[]>;
     try {
       setLoading(true);
       let currentPage = 1;
@@ -57,7 +52,8 @@ const App: React.FC = () => {
       setLoading(false);
     } catch (error) {
       setName(searchName);
-      setHttpStatus((error as errorType).response.status);
+      const apiError = error as ApiError;
+      setHttpStatus(apiError.response?.status || 500);
       setLoading(false);
     }
   };

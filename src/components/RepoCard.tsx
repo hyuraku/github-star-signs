@@ -1,17 +1,9 @@
 import React from 'react'
+import { GitHubRepository } from '../types/github'
 import '../css/RepoCard.css'
 
 export type RepoCardType = {
-  repo: {
-    name: string
-    html_url: string
-    description: string
-    owner: {
-      login: string
-    }
-    language: string
-    stargazers_count: number
-  }
+  repo: GitHubRepository
 }
 
 export const RepoCard: React.FC<RepoCardType> = ({repo}) => {

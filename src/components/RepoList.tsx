@@ -1,21 +1,9 @@
 import React from 'react'
 import { RepoCard } from './RepoCard'
+import { GitHubRepository } from '../types/github'
 
 interface Props {
-  repos: Array<RepoCard>
-}
-
-// eslint-disable-next-line
-interface RepoCard {
-  id: string
-  name: string
-  html_url: string
-  description: string
-  owner: {
-    login: string
-  }
-  language: string
-  stargazers_count: number
+  repos: GitHubRepository[]
 }
 
 export const RepoList: React.FC<Props> = ({ repos }) => (

@@ -4,12 +4,13 @@ import { NoStarRepo } from './NoStarRepo'
 import { NameError } from './NameError'
 import { Loading } from './Loading'
 import { NoContent } from './NoContent'
+import { GitHubRepository } from '../types/github'
 
 interface Props {
   loading: boolean
   name: string
   httpStatus: number
-  starredRepos: any
+  starredRepos: GitHubRepository[]
 }
 
 export const MainContent: React.FC<Props> = ({

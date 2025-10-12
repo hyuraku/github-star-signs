@@ -7,11 +7,21 @@ interface Props {
 
 export const NoStarRepo: React.FC<Props> = ({ name }) => {
   return (
-    <div className="ui container NoStarRepo">
-      <h2>
-        {' '}
-        <span className="name">{name}</span> has no starred repository
-      </h2>
+    <div className="no-star-container">
+      <div className="no-star-card">
+        <div className="no-star-icon">⭐</div>
+        <h2 className="no-star-title">No Starred Repositories</h2>
+        <p className="no-star-message">
+          <span className="username">{name}</span> hasn't starred any repositories yet.
+        </p>
+        <p className="no-star-description">
+          Starred repositories appear when a user finds interesting projects on GitHub
+          and clicks the star button to bookmark them for later reference.
+        </p>
+        <div className="no-star-suggestion">
+          <p>Try searching for another GitHub user to see their starred repositories!</p>
+        </div>
+      </div>
     </div>
   )
 }

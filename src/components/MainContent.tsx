@@ -1,7 +1,7 @@
 import React from 'react'
 import { RepoList } from './RepoList'
 import { NoStarRepo } from './NoStarRepo'
-import { NameError } from './NameError'
+import { ErrorMessage } from './ErrorMessage'
 import { Loading } from './Loading'
 import { NoContent } from './NoContent'
 import { GitHubRepository } from '../types/github'
@@ -21,7 +21,7 @@ export const MainContent: React.FC<Props> = ({
 }): JSX.Element => {
   if (loading === true) return <Loading />
   if (name === '') return <NoContent />
-  if (httpStatus !== 200) return <NameError name={name} />
+  if (httpStatus !== 200) return <ErrorMessage name={name} httpStatus={httpStatus} />
   if (starredRepos.length === 0) return <NoStarRepo name={name} />
   return <RepoList repos={starredRepos} />
 }

@@ -38,7 +38,7 @@
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@vitejs/plugin-react": "^3.0.1",
-    "cypress": "10.X",
+    "cypress": "13.15.2",
     "gh-pages": "^5.0.0",
     "postcss": "^8.3.7",
     "prettier": "2.1.1",

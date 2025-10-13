@@ -1,14 +1,96 @@
-.name {
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  background: rgba(0, 0, 0, 0.025);
-  padding: 1px 2px;
-  font-family: monospace;
-  font-size: 80%;
+.no-star-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 1rem;
+  min-height: 400px;
 }
 
-@media screen and (min-width: 768px) {
-  .NoStarRepo {
-    text-align: center;
-    margin: 2.5% 50%;
+.no-star-card {
+  background: #fff;
+  border: 2px solid #ffc107;
+  border-radius: 12px;
+  padding: 2.5rem;
+  max-width: 600px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(255, 193, 7, 0.1);
+}
+
+.no-star-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  opacity: 0.6;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+.no-star-title {
+  color: #333;
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+}
+
+.no-star-message {
+  color: #555;
+  font-size: 1.1rem;
+  margin: 0 0 1rem 0;
+  line-height: 1.6;
+}
+
+.username {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.025);
+  padding: 2px 6px;
+  font-family: monospace;
+  font-size: 95%;
+  border-radius: 3px;
+  font-weight: 600;
+}
+
+.no-star-description {
+  color: #666;
+  font-size: 0.95rem;
+  margin: 1rem 0;
+  line-height: 1.5;
+  padding: 1rem;
+  background: #f5f5f5;
+  border-radius: 6px;
+}
+
+.no-star-suggestion {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.no-star-suggestion p {
+  color: #2185d0;
+  font-size: 0.95rem;
+  margin: 0;
+  font-weight: 500;
+}
+
+@media screen and (max-width: 768px) {
+  .no-star-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .no-star-title {
+    font-size: 1.5rem;
+  }
+
+  .no-star-message {
+    font-size: 1rem;
   }
 }

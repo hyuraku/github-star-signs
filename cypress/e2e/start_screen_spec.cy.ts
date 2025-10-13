@@ -11,7 +11,7 @@ describe('start screen test', function () {
 
   it('input from', () => {
     cy.get('.top label').within(() => {
-      cy.get('input').should('have.attr', 'placeholder', 'Your GitHub username')
+      cy.get('input').should('have.attr', 'placeholder', 'Enter GitHub username')
     })
   })
 

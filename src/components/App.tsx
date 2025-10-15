@@ -69,7 +69,7 @@ const App: React.FC = () => {
             readOnly={loading}
           />
         </header>
-        <main id="main-content" role="main" aria-label="Repository results">
+        <main id="main-content" role="main" aria-label="Repository results" tabIndex={-1}>
           <MainContent
             loading={loading}
             httpStatus={httpStatus}

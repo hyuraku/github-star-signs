@@ -8,7 +8,6 @@ import '../css/Top.css'
 
 const maxRepoSize = 100
 
-
 const App: React.FC = () => {
   const [starredRepos, setStarredRepos] = useState<GitHubRepository[]>([]);
   const [name, setName] = useState('');
@@ -59,19 +58,28 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="top">
-      <SearchBar
-        onSubmit={onSearchSubmit}
-        readOnly={loading}
-      />
-      <MainContent
-        loading={loading}
-        httpStatus={httpStatus}
-        name={name}
-        starredRepos={starredRepos}
-      />
-      <Footer />
-    </div>
+    <>
+      <a href="#main-content" className="skip-to-main">
+        Skip to main content
+      </a>
+      <div className="top">
+        <header role="banner">
+          <SearchBar
+            onSubmit={onSearchSubmit}
+            readOnly={loading}
+          />
+        </header>
+        <main id="main-content" role="main" aria-label="Repository results" tabIndex={-1}>
+          <MainContent
+            loading={loading}
+            httpStatus={httpStatus}
+            name={name}
+            starredRepos={starredRepos}
+          />
+        </main>
+        <Footer />
+      </div>
+    </>
   );
 };
 

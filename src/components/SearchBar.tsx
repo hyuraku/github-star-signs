@@ -23,12 +23,13 @@ export const SearchBar: React.FC<Props> = React.memo((props) => {
 
   return (
     <div className="ui segment">
-      <form onSubmit={onFormSubmit} className="ui form">
+      <form onSubmit={onFormSubmit} className="ui form" role="search" aria-label="GitHub user search">
         <div className="field">
-          <h1>Enter GitHub username</h1>
+          <h1 id="search-heading">Enter GitHub username</h1>
           <div className="search-input-container">
-            <label className="search-label">
+            <label className="search-label" htmlFor="github-username-input">
               <input
+                id="github-username-input"
                 type="text"
                 autoFocus
                 value={name}
@@ -36,6 +37,9 @@ export const SearchBar: React.FC<Props> = React.memo((props) => {
                 readOnly={props.readOnly}
                 placeholder="Enter GitHub username"
                 className="search-input"
+                aria-labelledby="search-heading"
+                aria-describedby="search-hint"
+                aria-required="true"
               />
             </label>
             <button
@@ -43,11 +47,12 @@ export const SearchBar: React.FC<Props> = React.memo((props) => {
               onClick={handleSearchClick}
               disabled={props.readOnly || !name.trim()}
               className="search-button"
+              aria-label={props.readOnly ? 'Searching for repositories' : 'Search for starred repositories'}
             >
               {props.readOnly ? 'Searching...' : 'Search'}
             </button>
           </div>
-          <p className="search-hint">Press Enter or click Search to find starred repositories</p>
+          <p id="search-hint" className="search-hint">Press Enter or click Search to find starred repositories</p>
         </div>
       </form>
     </div>

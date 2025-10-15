@@ -47,16 +47,18 @@ export const ErrorMessage: React.FC<Props> = ({ name, httpStatus }) => {
   const error = getErrorMessage()
 
   return (
-    <div className="error-container">
+    <div className="error-container" role="alert" aria-live="assertive">
       <div className="error-card">
-        <div className="error-icon">
+        <div className="error-icon" aria-hidden="true">
           {httpStatus === 404 ? '🔍' : httpStatus === 403 ? '⏱️' : '⚠️'}
         </div>
         <h2 className="error-title">{error.title}</h2>
         <p className="error-message">{error.message}</p>
         <p className="error-suggestion">{error.suggestion}</p>
         <div className="error-details">
-          <span className="error-status">Status Code: {httpStatus}</span>
+          <span className="error-status" aria-label={`HTTP Status Code ${httpStatus}`}>
+            Status Code: {httpStatus}
+          </span>
         </div>
       </div>
     </div>

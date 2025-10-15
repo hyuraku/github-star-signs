@@ -7,9 +7,15 @@ interface Props {
 }
 
 export const RepoList: React.FC<Props> = ({ repos }) => (
-  <div className="ui container cards">
+  <section
+    className="ui container cards"
+    role="region"
+    aria-label="Starred repositories"
+    aria-live="polite"
+  >
+    <h2 className="visually-hidden">List of starred repositories ({repos.length} repositories)</h2>
     {repos.map((repo) => (
       <RepoCard key={repo.id} repo={repo} />
     ))}
-  </div>
+  </section>
 )

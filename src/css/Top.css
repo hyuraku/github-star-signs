@@ -2,3 +2,78 @@
   position: relative;
   min-height: 100vh;
 }
+
+.top header {
+  margin-bottom: 0;
+}
+
+.top main {
+  margin-top: 2rem;
+  padding: 0 1rem;
+  border-radius: 8px;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.top main:focus {
+  outline: none;
+}
+
+.top main:focus-visible {
+  box-shadow: 0 0 0 4px rgba(33, 133, 208, 0.3);
+  transform: scale(1.005);
+  animation: mainContentFocus 0.6s ease;
+}
+
+@keyframes mainContentFocus {
+  0%, 100% {
+    box-shadow: 0 0 0 4px rgba(33, 133, 208, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(33, 133, 208, 0.4);
+  }
+}
+
+/* Visually hidden class for screen readers */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Skip to main content link for keyboard navigation */
+.skip-to-main {
+  position: fixed;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #2185d0;
+  color: white;
+  padding: 12px 24px;
+  text-decoration: none;
+  z-index: 1000;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: top 0.3s ease, box-shadow 0.2s ease;
+}
+
+.skip-to-main:focus {
+  top: 20px;
+  outline: 4px solid #ffffff;
+  outline-offset: 3px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.skip-to-main:focus::after {
+  content: ' (Press Enter to skip)';
+  font-size: 0.875rem;
+  font-weight: 400;
+  opacity: 0.9;
+}

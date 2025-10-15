@@ -13,12 +13,16 @@ const App: React.FC = () => {
   const [name, setName] = useState('');
   const [httpStatus, setHttpStatus] = useState(200);
   const [loading, setLoading] = useState(false);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
 
   const onSearchSubmit = async (searchName: string) => {
     let response = {} as ApiResponse<GitHubRepository[]>;
     try {
       setLoading(true);
-      let currentPage = 1;
+      setCurrentPage(1);
+      setHasMore(true);
 
       response = await github.get(`/users/${searchName}/starred`, {
         params: {
@@ -26,34 +30,41 @@ const App: React.FC = () => {
           page: 1,
         },
       });
-      
+
       setName(searchName);
       setHttpStatus(response.status);
       setStarredRepos(response.data);
-      
-      // manage page and additional data size with local variables
-      currentPage += 1;
-      let currentAddRepoSize = response.data.length;
-      
-      while (currentAddRepoSize === maxRepoSize) {
-        const addResponse = await github.get(`/users/${searchName}/starred`, {
-          params: {
-            per_page: maxRepoSize,
-            page: currentPage,
-          },
-        });
-        
-        setStarredRepos(prevRepos => [...prevRepos, ...addResponse.data]);
-        currentPage++;
-        currentAddRepoSize = addResponse.data.length;
-      }
-      
+      setHasMore(response.data.length === maxRepoSize);
+      setCurrentPage(2);
       setLoading(false);
     } catch (error) {
       setName(searchName);
       const apiError = error as ApiError;
       setHttpStatus(apiError.response?.status || 500);
       setLoading(false);
+      setHasMore(false);
+    }
+  };
+
+  const loadMoreRepos = async () => {
+    if (!name || loadingMore || !hasMore) return;
+
+    try {
+      setLoadingMore(true);
+      const response = await github.get(`/users/${name}/starred`, {
+        params: {
+          per_page: maxRepoSize,
+          page: currentPage,
+        },
+      });
+
+      setStarredRepos(prevRepos => [...prevRepos, ...response.data]);
+      setHasMore(response.data.length === maxRepoSize);
+      setCurrentPage(prev => prev + 1);
+      setLoadingMore(false);
+    } catch (error) {
+      setLoadingMore(false);
+      setHasMore(false);
     }
   };
 
@@ -75,6 +86,9 @@ const App: React.FC = () => {
             httpStatus={httpStatus}
             name={name}
             starredRepos={starredRepos}
+            loadingMore={loadingMore}
+            hasMore={hasMore}
+            onLoadMore={loadMoreRepos}
           />
         </main>
         <Footer />

@@ -1,0 +1,43 @@
+.welcome {
+  padding: 2rem 1rem;
+}
+
+.welcome-hero {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.welcome-icon {
+  display: block;
+  font-size: 3rem;
+  color: #f0c040;
+  margin-bottom: 0.75rem;
+}
+
+.welcome-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #24292f;
+  margin: 0 0 0.5rem;
+}
+
+.welcome-subtitle {
+  font-size: 0.95rem;
+  color: #57606a;
+  margin: 0;
+}
+
+.welcome-sample {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.welcome-sample-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #57606a;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 1rem 0.25rem;
+}
+

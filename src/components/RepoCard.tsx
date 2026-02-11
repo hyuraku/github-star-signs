@@ -74,7 +74,7 @@ export const RepoCard: React.FC<RepoCardType> = ({repo}) => {
               </div>
             </div>
           </div>
-          <div className="card-description">{description || 'No description available'}</div>
+          <div className="card-description">{description || 'Visit repository for details'}</div>
         </div>
       ) : (
         <div className="content content-skeleton">

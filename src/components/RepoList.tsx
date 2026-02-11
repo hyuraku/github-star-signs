@@ -30,7 +30,7 @@ export const RepoList: React.FC<Props> = ({
 
   return (
     <section
-      className="ui container cards"
+      className="repo-container repo-cards"
       role="region"
       aria-label="Starred repositories"
       aria-live="polite"

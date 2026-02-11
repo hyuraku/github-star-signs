@@ -54,7 +54,7 @@ export const RepoCard: React.FC<RepoCardType> = ({repo}) => {
     >
       {isVisible ? (
         <div className="content">
-          <div className="ui header">
+          <div className="card-header">
             <a
               href={html_url}
               target="_blank"
@@ -64,8 +64,8 @@ export const RepoCard: React.FC<RepoCardType> = ({repo}) => {
               {name}
             </a>
           </div>
-          <div className="ui meta grid" role="group" aria-label="Repository metadata">
-            <div className="ui equal width row">
+          <div className="card-meta" role="group" aria-label="Repository metadata">
+            <div className="card-meta-row">
               <div className="column" aria-label="Repository owner">{owner.login}</div>
               <div className="column" aria-label="Programming language">{language || 'Not specified'}</div>
               <div className="column" aria-label={`${stargazers_count} stars`}>
@@ -74,7 +74,7 @@ export const RepoCard: React.FC<RepoCardType> = ({repo}) => {
               </div>
             </div>
           </div>
-          <div className="ui description">{description || 'No description available'}</div>
+          <div className="card-description">{description || 'No description available'}</div>
         </div>
       ) : (
         <div className="content content-skeleton">

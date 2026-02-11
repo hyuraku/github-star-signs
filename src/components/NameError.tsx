@@ -7,7 +7,7 @@ interface Props {
 
 export const NameError: React.FC<Props> = ({ name }) => {
   return (
-    <div className="ui container nameError">
+    <div className="repo-container nameError">
       <h2>
         Can't find user <span className="name">{name}</span>. Check spelling.
       </h2>

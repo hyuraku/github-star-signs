@@ -26,7 +26,37 @@ a:focus-visible {
 }
 
 .card {
+  background: #fff;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  padding: 1rem;
   transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.card .content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.card-header {
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.card-meta {
+  font-size: 0.875rem;
+  color: #57606a;
+}
+
+.card-meta-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.card-meta-row .column {
+  flex: 1;
 }
 
 .card:focus-within {
@@ -39,7 +69,7 @@ a:focus-visible {
   color: #24292f;
 }
 
-.description {
+.card-description {
   overflow-wrap: break-word;
   color: #57606a;
   line-height: 1.5;

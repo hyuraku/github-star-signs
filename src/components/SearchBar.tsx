@@ -22,8 +22,8 @@ export const SearchBar: React.FC<Props> = React.memo((props) => {
   }
 
   return (
-    <div className="ui segment">
-      <form onSubmit={onFormSubmit} className="ui form" role="search" aria-label="GitHub user search">
+    <div className="search-segment">
+      <form onSubmit={onFormSubmit} className="search-form" role="search" aria-label="GitHub user search">
         <div className="field">
           <h1 id="search-heading">Enter GitHub username</h1>
           <div className="search-input-container">

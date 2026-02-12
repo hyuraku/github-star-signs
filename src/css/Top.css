@@ -4,6 +4,33 @@
   box-sizing: border-box;
 }
 
+a {
+  color: #0969da;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+a:hover {
+  color: #0550ae;
+  text-decoration: underline;
+}
+
+a:focus {
+  outline: 3px solid #2185d0;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+a:focus:not(:focus-visible) {
+  outline: none;
+}
+
+a:focus-visible {
+  outline: 3px solid #2185d0;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
 .top {
   display: flex;
   flex-direction: column;

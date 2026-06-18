@@ -24,7 +24,7 @@ export const MainContent: React.FC<Props> = ({
   loadingMore = false,
   hasMore = false,
   onLoadMore,
-}): JSX.Element => {
+}): React.JSX.Element => {
   if (loading === true) return <Loading />
   if (name === '') return <NoContent />
   if (httpStatus !== 200) return <ErrorMessage name={name} httpStatus={httpStatus} />

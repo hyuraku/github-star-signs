@@ -16,19 +16,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ matrix.node-version }}
+
       - name: Cypress run on chrome
         uses: cypress-io/github-action@v7
         with:
           start: yarn start
           browser: chrome
-          headless: true
-          spec: cypress/e2e/start_screen_spec.cy.ts,cypress/e2e/input_data_spec.cy.ts
           config-file: cypress.config.ts
 
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v6
-        with:
-          node-version: ${{ matrix.node-version }}
       - run: yarn install
       - run: yarn install --immutable --immutable-cache --check-cache
       - run: yarn build

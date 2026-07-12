@@ -19,16 +19,16 @@ describe('Repository Cards Display', function () {
     // Verify first card has the correct structure
     cy.get('.card').first().within(() => {
       // Check that header link exists and is visible
-      cy.get('.ui.header a')
+      cy.get('.card-header a')
         .should('be.visible')
         .should('have.attr', 'href')
         .and('include', 'github.com')
 
-      cy.get('.ui.header a')
+      cy.get('.card-header a')
         .should('have.attr', 'target', '_blank')
 
       // Check that metadata section exists
-      cy.get('.ui.meta.grid').should('exist')
+      cy.get('.card-meta').should('exist')
 
       // Check that owner, language, and stars are displayed
       cy.get('.column').should('have.length', 3)
@@ -43,7 +43,7 @@ describe('Repository Cards Display', function () {
       cy.get('.column').last().should('have.attr', 'aria-label').and('include', 'stars')
 
       // Check that description exists (even if empty)
-      cy.get('.ui.description').should('exist')
+      cy.get('.card-description').should('exist')
     })
   })
 
@@ -91,10 +91,10 @@ describe('Repository Cards Display', function () {
     // Check first card's accessibility within the card
     cy.get('.card').first().within(() => {
       // Link should have aria-label
-      cy.get('.ui.header a').should('have.attr', 'aria-label')
+      cy.get('.card-header a').should('have.attr', 'aria-label')
 
       // Metadata should have role and aria-label
-      cy.get('.ui.meta.grid')
+      cy.get('.card-meta')
         .should('have.attr', 'role', 'group')
         .should('have.attr', 'aria-label', 'Repository metadata')
 

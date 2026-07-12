@@ -7,6 +7,13 @@ on:
   push:
     branches: [master]
 
+# GitHub Pages allows only one in-progress deployment at a time.
+# Serialize deploys so back-to-back pushes (e.g. Dependabot merges) queue
+# instead of colliding with "due to in progress deployment" errors.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-24.04

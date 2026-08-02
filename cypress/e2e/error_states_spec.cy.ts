@@ -1,5 +1,6 @@
 import {
   interceptStarredEmpty,
+  interceptStarredMalformed,
   interceptStarredSinglePage,
   interceptRateLimited,
   interceptUserNotFound,
@@ -54,6 +55,25 @@ describe('Error and empty states', function () {
     cy.get('.search-button').click()
 
     cy.get('.error-container').should('not.exist')
+    cy.get('.card').should('have.length', 3)
+  })
+
+  it('should keep the search usable when a repository fails to render', () => {
+    // The thrown TypeError is the point of this test, not a test failure.
+    cy.on('uncaught:exception', () => false)
+
+    interceptStarredMalformed()
+    search('octocat')
+
+    cy.get('.error-title').should('contain', 'Could not display these results')
+
+    // The search bar lives outside the boundary, so recovery is possible
+    // without a reload.
+    interceptStarredSinglePage()
+    cy.get('.search-input').clear().type('octocat')
+    cy.get('.search-button').click()
+
+    cy.get('.error-title').should('not.exist')
     cy.get('.card').should('have.length', 3)
   })
 

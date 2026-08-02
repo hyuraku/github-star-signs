@@ -56,4 +56,12 @@ describe('Error and empty states', function () {
     cy.get('.error-container').should('not.exist')
     cy.get('.card').should('have.length', 3)
   })
+
+  it('should send one request per search', () => {
+    interceptStarredSinglePage()
+    search('octocat')
+    cy.get('.card').should('have.length', 3)
+
+    cy.get('@starred.all').should('have.length', 1)
+  })
 })

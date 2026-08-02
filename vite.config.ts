@@ -5,7 +5,11 @@ import compression from "vite-plugin-compression"
 export default defineConfig({
   base: '/github-star-signs',
   plugins: [
-    react(),
+    react({
+      babel: {
+        plugins: [['babel-plugin-react-compiler', {}]],
+      },
+    }),
     compression({ algorithm: 'gzip' }),
     compression({ algorithm: 'brotliCompress' }),
   ],

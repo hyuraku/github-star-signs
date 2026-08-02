@@ -6,7 +6,7 @@ interface Props {
   readOnly: boolean
 }
 
-export const SearchBar: React.FC<Props> = React.memo((props) => {
+export const SearchBar: React.FC<Props> = (props) => {
   const [name, setName] = useState('')
   const onFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -50,6 +50,4 @@ export const SearchBar: React.FC<Props> = React.memo((props) => {
       </form>
     </div>
   )
-})
-
-SearchBar.displayName = 'SearchBar'
+}

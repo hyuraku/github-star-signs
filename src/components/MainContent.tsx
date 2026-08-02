@@ -4,37 +4,36 @@ import { NoStarRepo } from './NoStarRepo'
 import { ErrorMessage } from './ErrorMessage'
 import { Loading } from './Loading'
 import { NoContent } from './NoContent'
-import { GitHubRepository } from '../types/github'
+import { StarredReposState } from '../hooks/useStarredRepos'
 
 interface Props {
-  loading: boolean
-  name: string
-  httpStatus: number
-  starredRepos: GitHubRepository[]
-  loadingMore?: boolean
-  hasMore?: boolean
-  onLoadMore?: () => void
+  state: StarredReposState
+  onLoadMore: () => void
 }
 
 export const MainContent: React.FC<Props> = ({
-  loading,
-  name,
-  httpStatus,
-  starredRepos,
-  loadingMore = false,
-  hasMore = false,
+  state,
   onLoadMore,
 }): React.JSX.Element => {
-  if (loading === true) return <Loading />
-  if (name === '') return <NoContent />
-  if (httpStatus !== 200) return <ErrorMessage name={name} httpStatus={httpStatus} />
-  if (starredRepos.length === 0) return <NoStarRepo name={name} />
-  return (
-    <RepoList
-      repos={starredRepos}
-      loadingMore={loadingMore}
-      hasMore={hasMore}
-      onLoadMore={onLoadMore}
-    />
-  )
+  // No default branch: TypeScript reports a missing return if a state
+  // is ever added without a screen to render it.
+  switch (state.tag) {
+    case 'idle':
+      return <NoContent />
+    case 'loading':
+      return <Loading />
+    case 'error':
+      return <ErrorMessage name={state.name} httpStatus={state.httpStatus} />
+    case 'empty':
+      return <NoStarRepo name={state.name} />
+    case 'loaded':
+      return (
+        <RepoList
+          repos={state.repos}
+          loadingMore={state.loadingMore}
+          hasMore={state.hasMore}
+          onLoadMore={onLoadMore}
+        />
+      )
+  }
 }

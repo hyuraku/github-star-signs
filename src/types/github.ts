@@ -19,18 +19,3 @@ export interface GitHubRepository {
   private: boolean;
 }
 
-export interface ApiResponse<T> {
-  status: number;
-  data: T;
-}
-
-export interface ApiError {
-  response?: {
-    status: number;
-    data?: {
-      message?: string;
-    };
-  };
-  request?: any;
-  message: string;
-}

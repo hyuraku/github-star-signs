@@ -1,72 +1,17 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { SearchBar } from './SearchBar'
-import { github } from '../api/github'
 import { MainContent } from './MainContent'
+import { ErrorBoundary } from './ErrorBoundary'
 import { Footer } from './Footer'
-import { GitHubRepository, ApiResponse, ApiError } from '../types/github'
+import { useStarredRepos, StarredReposState } from '../hooks/useStarredRepos'
 import '../css/Top.css'
 
-const maxRepoSize = 100
+/** Identifies what is being shown, so a new request clears a caught error. */
+const boundaryResetKey = (state: StarredReposState) =>
+  state.tag === 'idle' ? state.tag : `${state.tag}:${state.name}`
 
 const App: React.FC = () => {
-  const [starredRepos, setStarredRepos] = useState<GitHubRepository[]>([]);
-  const [name, setName] = useState('');
-  const [httpStatus, setHttpStatus] = useState(200);
-  const [loading, setLoading] = useState(false);
-  const [loadingMore, setLoadingMore] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
-
-  const onSearchSubmit = async (searchName: string) => {
-    let response = {} as ApiResponse<GitHubRepository[]>;
-    try {
-      setLoading(true);
-      setCurrentPage(1);
-      setHasMore(true);
-
-      response = await github.get(`/users/${searchName}/starred`, {
-        params: {
-          per_page: maxRepoSize,
-          page: 1,
-        },
-      });
-
-      setName(searchName);
-      setHttpStatus(response.status);
-      setStarredRepos(response.data);
-      setHasMore(response.data.length === maxRepoSize);
-      setCurrentPage(2);
-      setLoading(false);
-    } catch (error) {
-      setName(searchName);
-      const apiError = error as ApiError;
-      setHttpStatus(apiError.response?.status || 500);
-      setLoading(false);
-      setHasMore(false);
-    }
-  };
-
-  const loadMoreRepos = async () => {
-    if (!name || loadingMore || !hasMore) return;
-
-    try {
-      setLoadingMore(true);
-      const response = await github.get(`/users/${name}/starred`, {
-        params: {
-          per_page: maxRepoSize,
-          page: currentPage,
-        },
-      });
-
-      setStarredRepos(prevRepos => [...prevRepos, ...response.data]);
-      setHasMore(response.data.length === maxRepoSize);
-      setCurrentPage(prev => prev + 1);
-      setLoadingMore(false);
-    } catch (error) {
-      setLoadingMore(false);
-      setHasMore(false);
-    }
-  };
+  const { state, search, loadMore } = useStarredRepos()
 
   return (
     <>
@@ -75,21 +20,14 @@ const App: React.FC = () => {
       </a>
       <div className="top">
         <header role="banner">
-          <SearchBar
-            onSubmit={onSearchSubmit}
-            readOnly={loading}
-          />
+          <SearchBar onSubmit={search} readOnly={state.tag === 'loading'} />
         </header>
         <main id="main-content" role="main" aria-label="Repository results" tabIndex={-1}>
-          <MainContent
-            loading={loading}
-            httpStatus={httpStatus}
-            name={name}
-            starredRepos={starredRepos}
-            loadingMore={loadingMore}
-            hasMore={hasMore}
-            onLoadMore={loadMoreRepos}
-          />
+          {/* SearchBar sits outside the boundary, so a failed render
+              still leaves the user a way to search again. */}
+          <ErrorBoundary resetKey={boundaryResetKey(state)}>
+            <MainContent state={state} onLoadMore={loadMore} />
+          </ErrorBoundary>
         </main>
         <Footer />
       </div>

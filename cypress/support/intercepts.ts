@@ -41,6 +41,28 @@ export const interceptStarredSinglePage = (count = 3) =>
 /** Serves an empty starred list (user exists but has starred nothing). */
 export const interceptStarredEmpty = () => interceptStarred({})
 
+/**
+ * Answers 200 with a repository missing its owner. The types promise the
+ * field is present, but the response is never validated, so RepoCard
+ * throws while rendering. This is what the error boundary is there for.
+ */
+export const interceptStarredMalformed = () => {
+  cy.intercept('GET', STARRED_ROUTE, {
+    statusCode: 200,
+    body: [
+      {
+        id: 1,
+        name: 'broken-repo',
+        html_url: 'https://github.com/octocat/broken-repo',
+        description: null,
+        owner: null,
+        language: null,
+        stargazers_count: 0,
+      },
+    ],
+  }).as('starred')
+}
+
 /** Fails the request the way the API reports a missing user. */
 export const interceptUserNotFound = () => {
   cy.intercept('GET', STARRED_ROUTE, {

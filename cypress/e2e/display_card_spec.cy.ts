@@ -1,4 +1,12 @@
-export {}
+import {
+  interceptStarredSinglePage,
+  interceptStarredWithMorePages,
+} from '../support/intercepts'
+
+const search = (username: string) => {
+  cy.get('.search-input').type(username)
+  cy.get('.search-button').click()
+}
 
 describe('Repository Cards Display', function () {
   beforeEach(() => {
@@ -6,15 +14,14 @@ describe('Repository Cards Display', function () {
   })
 
   it('should display repository cards with correct structure after searching', () => {
-    // Search for a user
-    cy.get('.search-input').type('hyuraku')
-    cy.get('.search-button').click()
+    interceptStarredSinglePage()
+    search('octocat')
 
     // Wait for loading to complete
-    cy.get('.loading-container', { timeout: 15000 }).should('not.exist')
+    cy.get('.loading-container').should('not.exist')
 
     // Verify that cards are displayed
-    cy.get('.card').should('have.length.greaterThan', 0)
+    cy.get('.card').should('have.length', 3)
 
     // Verify first card has the correct structure
     cy.get('.card').first().within(() => {
@@ -48,12 +55,11 @@ describe('Repository Cards Display', function () {
   })
 
   it('should display loading indicator when loading more repositories', () => {
-    // Search for a user with many repositories
-    cy.get('.search-input').type('sindresorhus')
-    cy.get('.search-button').click()
+    interceptStarredWithMorePages()
+    search('octocat')
 
     // Wait for initial load
-    cy.get('.loading-container', { timeout: 15000 }).should('not.exist')
+    cy.get('.loading-container').should('not.exist')
 
     // Scroll to bottom to trigger infinite scroll
     cy.scrollTo('bottom')
@@ -64,25 +70,37 @@ describe('Repository Cards Display', function () {
     cy.get('.loading-more-text').should('contain', 'Loading more repositories')
   })
 
+  it('should append the next page once infinite scroll resolves', () => {
+    interceptStarredWithMorePages()
+    search('octocat')
+
+    cy.get('.loading-container').should('not.exist')
+    cy.get('.card').should('have.length', 100)
+
+    cy.scrollTo('bottom')
+
+    // The second page adds 20 more cards and then stops requesting
+    cy.get('.card').should('have.length', 120)
+    cy.get('.load-more-trigger').should('not.exist')
+  })
+
   it('should apply lazy loading animation to cards', () => {
-    // Search for a user
-    cy.get('.search-input').type('gaearon')
-    cy.get('.search-button').click()
+    interceptStarredSinglePage()
+    search('octocat')
 
     // Wait for initial load
-    cy.get('.loading-container', { timeout: 15000 }).should('not.exist')
+    cy.get('.loading-container').should('not.exist')
 
     // Verify cards have the visible class (lazy loaded)
     cy.get('.card-visible').should('have.length.greaterThan', 0)
   })
 
   it('should have proper accessibility attributes on cards', () => {
-    // Search for a user
-    cy.get('.search-input').type('hyuraku')
-    cy.get('.search-button').click()
+    interceptStarredSinglePage()
+    search('octocat')
 
     // Wait for loading to complete
-    cy.get('.loading-container', { timeout: 15000 }).should('not.exist')
+    cy.get('.loading-container').should('not.exist')
 
     // Verify first card is an article element with accessibility attributes
     cy.get('article.card').first().should('exist')

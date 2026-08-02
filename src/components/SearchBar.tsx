@@ -15,12 +15,6 @@ export const SearchBar: React.FC<Props> = React.memo((props) => {
     }
   }
 
-  const handleSearchClick = () => {
-    if (name.trim()) {
-      props.onSubmit(name.trim())
-    }
-  }
-
   return (
     <div className="search-segment">
       <form onSubmit={onFormSubmit} className="search-form" role="search" aria-label="GitHub user search">
@@ -44,7 +38,6 @@ export const SearchBar: React.FC<Props> = React.memo((props) => {
             </label>
             <button
               type="submit"
-              onClick={handleSearchClick}
               disabled={props.readOnly || !name.trim()}
               className="search-button"
               aria-label={props.readOnly ? 'Searching for repositories' : 'Search for starred repositories'}

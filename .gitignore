@@ -26,3 +26,11 @@ cypress/integration/examples/
 cypress/videos/
 cypress/fixtures/example.*
 cypress/screenshots/
+
+# local planning notes and scratch screenshots (not shared with CI)
+/IMPROVEMENT_SUGGESTIONS.md
+/REFACTOR_PLAN.md
+/STAGING_ENVIRONMENT_PLAN.md
+/UX_IMPROVEMENTS_IDEAS.md
+/UX_PSYCHOLOGY_REVIEW.md
+/screenshot-*.png

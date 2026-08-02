@@ -1,12 +1,10 @@
 import React, { useState } from 'react'
 import { SearchBar } from './SearchBar'
-import { github } from '../api/github'
+import { fetchStarredRepos, statusFromError, PAGE_SIZE } from '../api/github'
 import { MainContent } from './MainContent'
 import { Footer } from './Footer'
-import { GitHubRepository, ApiResponse, ApiError } from '../types/github'
+import { GitHubRepository } from '../types/github'
 import '../css/Top.css'
-
-const maxRepoSize = 100
 
 const App: React.FC = () => {
   const [starredRepos, setStarredRepos] = useState<GitHubRepository[]>([]);
@@ -18,29 +16,22 @@ const App: React.FC = () => {
   const [hasMore, setHasMore] = useState(true);
 
   const onSearchSubmit = async (searchName: string) => {
-    let response = {} as ApiResponse<GitHubRepository[]>;
     try {
       setLoading(true);
       setCurrentPage(1);
       setHasMore(true);
 
-      response = await github.get(`/users/${searchName}/starred`, {
-        params: {
-          per_page: maxRepoSize,
-          page: 1,
-        },
-      });
+      const repos = await fetchStarredRepos(searchName, 1);
 
       setName(searchName);
-      setHttpStatus(response.status);
-      setStarredRepos(response.data);
-      setHasMore(response.data.length === maxRepoSize);
+      setHttpStatus(200);
+      setStarredRepos(repos);
+      setHasMore(repos.length === PAGE_SIZE);
       setCurrentPage(2);
       setLoading(false);
     } catch (error) {
       setName(searchName);
-      const apiError = error as ApiError;
-      setHttpStatus(apiError.response?.status || 500);
+      setHttpStatus(statusFromError(error));
       setLoading(false);
       setHasMore(false);
     }
@@ -51,18 +42,13 @@ const App: React.FC = () => {
 
     try {
       setLoadingMore(true);
-      const response = await github.get(`/users/${name}/starred`, {
-        params: {
-          per_page: maxRepoSize,
-          page: currentPage,
-        },
-      });
+      const repos = await fetchStarredRepos(name, currentPage);
 
-      setStarredRepos(prevRepos => [...prevRepos, ...response.data]);
-      setHasMore(response.data.length === maxRepoSize);
+      setStarredRepos(prevRepos => [...prevRepos, ...repos]);
+      setHasMore(repos.length === PAGE_SIZE);
       setCurrentPage(prev => prev + 1);
       setLoadingMore(false);
-    } catch (error) {
+    } catch {
       setLoadingMore(false);
       setHasMore(false);
     }

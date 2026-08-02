@@ -1,6 +1,8 @@
 import {
+  interceptStarred,
   interceptStarredSinglePage,
   interceptStarredWithMorePages,
+  PAGE_SIZE,
 } from '../support/intercepts'
 
 const search = (username: string) => {
@@ -84,15 +86,20 @@ describe('Repository Cards Display', function () {
     cy.get('.load-more-trigger').should('not.exist')
   })
 
-  it('should apply lazy loading animation to cards', () => {
-    interceptStarredSinglePage()
+  it('should render card content once scrolled into view', () => {
+    // Cards below the fold are skipped by content-visibility until the
+    // browser paints them, so assert on content rather than on a class.
+    interceptStarred({ 1: PAGE_SIZE })
     search('octocat')
 
-    // Wait for initial load
     cy.get('.loading-container').should('not.exist')
+    cy.get('.card').should('have.length', PAGE_SIZE)
 
-    // Verify cards have the visible class (lazy loaded)
-    cy.get('.card-visible').should('have.length.greaterThan', 0)
+    cy.get('.card').last().scrollIntoView()
+    cy.get('.card').last().within(() => {
+      cy.get('.card-header a').should('be.visible').and('not.be.empty')
+      cy.get('.card-description').should('not.be.empty')
+    })
   })
 
   it('should have proper accessibility attributes on cards', () => {

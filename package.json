@@ -5,8 +5,8 @@
   "type": "module",
   "homepage": "http://hyuraku.github.io/github-star-signs",
   "dependencies": {
-    "react": "^19.2.7",
-    "react-dom": "^19.2.7"
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
   },
   "scripts": {
     "cy:open": "cypress open",

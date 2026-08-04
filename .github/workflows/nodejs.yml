@@ -1,43 +1,45 @@
-# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+# Static checks (lint / typecheck / build) on every push, and a GitHub Pages
+# deploy on master. Cypress e2e lives in its own workflow so the two run in
+# parallel.
 
 name: Node.js CI
 
-on:
-  push:
-    branches: [master]
+on: [push]
 
-# GitHub Pages allows only one in-progress deployment at a time.
-# Serialize deploys so back-to-back pushes (e.g. Dependabot merges) queue
-# instead of colliding with "due to in progress deployment" errors.
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+permissions:
+  contents: read
 
 jobs:
   build:
     runs-on: ubuntu-24.04
 
-    strategy:
-      matrix:
-        node-version: [22.x]
-
     steps:
       - uses: actions/checkout@v6
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js from .node-version
         uses: actions/setup-node@v6
         with:
-          node-version: ${{ matrix.node-version }}
-      - run: yarn install
-      - run: yarn install --immutable --immutable-cache --check-cache
+          node-version-file: .node-version
+          cache: yarn
+      - run: yarn install --frozen-lockfile
+      - run: yarn lint
+      - run: yarn typecheck
       - run: yarn build
       - name: prepare deploy
+        if: github.ref == 'refs/heads/master'
         uses: actions/upload-pages-artifact@v5
         with:
           path: build
+
   deploy:
+    if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-24.04
     needs: build
+    # GitHub Pages allows only one in-progress deployment at a time.
+    # Serialize deploys so back-to-back pushes (e.g. Dependabot merges) queue
+    # instead of colliding with "due to in progress deployment" errors.
+    concurrency:
+      group: "pages"
+      cancel-in-progress: false
     permissions:
       pages: write
       id-token: write

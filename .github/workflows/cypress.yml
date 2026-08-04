@@ -1,3 +1,7 @@
+# End-to-end tests. cypress-io/github-action installs dependencies (with a
+# frozen lockfile) and caches the Cypress binary itself, so this workflow has
+# no install step of its own.
+
 name: Cypress
 
 on: [push]
@@ -9,17 +13,14 @@ jobs:
   cypress:
     name: cypress
     runs-on: ubuntu-24.04
-    strategy:
-      matrix:
-        node-version: [22.x]
     steps:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js from .node-version
         uses: actions/setup-node@v6
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version-file: .node-version
 
       - name: Cypress run on chrome
         uses: cypress-io/github-action@v7
@@ -27,7 +28,3 @@ jobs:
           start: yarn start
           browser: chrome
           config-file: cypress.config.ts
-
-      - run: yarn install
-      - run: yarn install --immutable --immutable-cache --check-cache
-      - run: yarn build

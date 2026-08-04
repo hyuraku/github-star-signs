@@ -9,13 +9,13 @@
     "react-dom": "^19.2.7"
   },
   "scripts": {
-    "deploy": "gh-pages -d build",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "cy:run:chrome": "cypress run --browser chrome",
     "cy:run:firefox": "cypress run --browser firefox",
     "start": "vite",
     "lint": "eslint src",
+    "typecheck": "tsc --noEmit",
     "build": "tsc --noEmit && vite build"
   },
   "devDependencies": {
@@ -28,7 +28,6 @@
     "cypress": "15.17.0",
     "eslint": "^10.8.0",
     "eslint-plugin-react-hooks": "^7.1.1",
-    "gh-pages": "^6.3.0",
     "globals": "^17.8.0",
     "postcss": "^8.5.15",
     "prettier": "3.8.4",

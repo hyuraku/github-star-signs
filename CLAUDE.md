@@ -25,11 +25,17 @@ Runs ESLint (flat config) over `src`. `eslint-plugin-react-hooks` v7 carries the
 React Compiler rules, so a violation here usually means the compiler cannot
 memoize that code.
 
-**Deploy to GitHub Pages:**
+**Type check:**
 ```bash
-yarn deploy
+yarn typecheck
 ```
-Deploys the build directory to GitHub Pages using gh-pages.
+Runs `tsc --noEmit` on its own. `yarn build` runs the same check before bundling,
+so this is the faster way to check types without producing a build.
+
+**Deploy to GitHub Pages:**
+Deployment happens only through the `Node.js CI` workflow on a push to `master`.
+There is no local deploy command — `gh-pages` was removed so that the artifact
+Pages serves always comes from CI.
 
 **Testing:**
 ```bash
@@ -102,3 +108,13 @@ for a given username. Built with Vite and deployed to GitHub Pages.
 - Cypress for e2e testing, with GitHub API responses intercepted
 - gzip and brotli pre-compression via `vite-plugin-compression`
 - GitHub Pages deployment with custom base path `/github-star-signs`
+
+**CI:**
+- Two workflows run on every push. `Node.js CI` does lint → typecheck → build;
+  `Cypress` does the e2e run. They are separate workflows so they run in parallel.
+- Both take their Node version from `.node-version` via `node-version-file`, so
+  the version is declared in one place only.
+- Installs use `yarn install --frozen-lockfile`. This is Yarn 1 — the Berry flags
+  (`--immutable` and friends) are silently ignored here and give no protection.
+- Deployment is a separate job in `Node.js CI`, gated on `master` and serialized
+  through `concurrency: pages` because Pages allows one in-progress deploy.

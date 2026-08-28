@@ -1,6 +1,6 @@
-# Static checks (lint / typecheck / build) on every push, and a GitHub Pages
-# deploy on master. Cypress e2e lives in its own workflow so the two run in
-# parallel.
+# Static checks (lint / typecheck / unit tests / build) on every push, and a
+# GitHub Pages deploy on master. Cypress e2e lives in its own workflow so the
+# two run in parallel.
 
 name: Node.js CI
 
@@ -23,6 +23,7 @@ jobs:
       - run: yarn install --frozen-lockfile
       - run: yarn lint
       - run: yarn typecheck
+      - run: yarn test
       - run: yarn build
       - name: prepare deploy
         if: github.ref == 'refs/heads/master'

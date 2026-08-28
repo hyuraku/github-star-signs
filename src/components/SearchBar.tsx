@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { isValidUsername, USERNAME_ERROR_MESSAGE } from '../utils/validateUsername'
 import '../css/SearchBar.css'
 
 interface Props {
@@ -8,11 +9,22 @@ interface Props {
 
 export const SearchBar: React.FC<Props> = (props) => {
   const [name, setName] = useState('')
+  // Only set on submit: warning while the user is still typing would flag
+  // every name as broken before it is finished.
+  const [invalid, setInvalid] = useState(false)
+
   const onFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    if (name.trim()) {
-      props.onSubmit(name.trim())
+    const trimmed = name.trim()
+    if (!trimmed) {
+      return
     }
+    if (!isValidUsername(trimmed)) {
+      setInvalid(true)
+      return
+    }
+    setInvalid(false)
+    props.onSubmit(trimmed)
   }
 
   return (
@@ -27,12 +39,17 @@ export const SearchBar: React.FC<Props> = (props) => {
                 type="text"
                 autoFocus
                 value={name}
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e) => {
+                  setName(e.target.value)
+                  // Drop a stale warning as soon as the name changes.
+                  setInvalid(false)
+                }}
                 readOnly={props.readOnly}
                 placeholder="Enter GitHub username"
                 className="search-input"
                 aria-labelledby="search-heading"
-                aria-describedby="search-hint"
+                aria-describedby={invalid ? 'search-error search-hint' : 'search-hint'}
+                aria-invalid={invalid ? 'true' : undefined}
                 aria-required="true"
               />
             </label>
@@ -45,6 +62,11 @@ export const SearchBar: React.FC<Props> = (props) => {
               {props.readOnly ? 'Searching...' : 'Search'}
             </button>
           </div>
+          {invalid && (
+            <p id="search-error" className="search-error" role="alert">
+              {USERNAME_ERROR_MESSAGE}
+            </p>
+          )}
           <p id="search-hint" className="search-hint">Press Enter or click Search to find starred repositories</p>
         </div>
       </form>

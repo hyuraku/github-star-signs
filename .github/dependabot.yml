@@ -1,25 +1,38 @@
+# Dependabot の設定
+# - version update: 月 1 回、minor/patch をエコシステムごとに 1 本の PR にまとめる。major は個別 PR
+# - security update: schedule と無関係に、脆弱性の公開時に即座に PR が来る（1 本にまとめる）
+# - cooldown: 新しいリリースは 7 日待ってから取り込む（security update には効かない）
+# 参考: https://github.blog/security/supply-chain-security/tame-dependabot-group-your-updates-slow-the-cadence-keep-security-fast/
 version: 2
 updates:
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
-      interval: "weekly"
-    open-pull-requests-limit: 10
+      interval: "monthly"
+    cooldown:
+      default-days: 7
     groups:
-      react:
-        patterns:
-          - "react"
-          - "react-dom"
-        update-types:
-          - "minor"
-          - "patch"
-      dev-dependencies:
-        dependency-type: "development"
-        update-types:
-          - "minor"
-          - "patch"
+      minor-and-patch:
+        applies-to: version-updates
+        patterns: ["*"]
+        update-types: ["minor", "patch"]
+      security:
+        applies-to: security-updates
+        patterns: ["*"]
 
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "monthly"
+    cooldown:
+      default-days: 7
+    groups:
+      minor-and-patch:
+        applies-to: version-updates
+        patterns: ["*"]
+        update-types: ["minor", "patch"]
+      # actions は major 更新が多いので、major も月 1 本にまとめる（手動レビュー）
+      actions-major:
+        applies-to: version-updates
+        patterns: ["*"]
+        update-types: ["major"]
